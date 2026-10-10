@@ -1,0 +1,11 @@
+PySide6>=6.8,<7
+psutil>=6,<8
+scapy>=2.6,<3
+dnspython>=2.7,<3
+httpx[http2]>=0.28,<1
+cryptography>=44
+websockets>=14,<18
+aioquic>=1.2,<2
+asyncssh>=2.19,<3
+pytest>=8,<10
+pyinstaller>=6.11,<7
