@@ -1,0 +1,130 @@
+{
+  "name": "示例：fault",
+  "mode": "teaching_simulation",
+  "nodes": [
+    {
+      "id": "PC1",
+      "name": "PC1",
+      "type": "pc",
+      "x": 70,
+      "y": 90,
+      "interfaces": [
+        {
+          "name": "eth0",
+          "ip": "192.168.1.10/24"
+        }
+      ],
+      "gateway": "192.168.1.254"
+    },
+    {
+      "id": "PC2",
+      "name": "PC2",
+      "type": "laptop",
+      "x": 70,
+      "y": 270,
+      "interfaces": [
+        {
+          "name": "eth0",
+          "ip": "192.168.1.20/24"
+        }
+      ],
+      "gateway": "192.168.1.1"
+    },
+    {
+      "id": "SW1",
+      "name": "SW1",
+      "type": "switch",
+      "x": 310,
+      "y": 180,
+      "interfaces": [
+        {
+          "name": "p1",
+          "ip": ""
+        },
+        {
+          "name": "p2",
+          "ip": ""
+        },
+        {
+          "name": "p3",
+          "ip": ""
+        }
+      ]
+    },
+    {
+      "id": "R1",
+      "name": "R1",
+      "type": "router",
+      "x": 530,
+      "y": 180,
+      "interfaces": [
+        {
+          "name": "lan",
+          "ip": "192.168.1.1/24"
+        },
+        {
+          "name": "wan",
+          "ip": "203.0.113.1/24"
+        }
+      ],
+      "dhcp": {
+        "network": "192.168.1.0/24",
+        "gateway": "192.168.1.1",
+        "start": 100,
+        "end": 199
+      },
+      "nat": {
+        "public_ip": "203.0.113.1",
+        "outside": "wan"
+      }
+    },
+    {
+      "id": "WEB",
+      "name": "WEB",
+      "type": "server",
+      "x": 760,
+      "y": 180,
+      "interfaces": [
+        {
+          "name": "eth0",
+          "ip": "203.0.113.10/24"
+        }
+      ],
+      "gateway": "203.0.113.1"
+    }
+  ],
+  "links": [
+    {
+      "a": "PC1:eth0",
+      "b": "SW1:p1",
+      "id": "L1",
+      "delay_ms": 5,
+      "bandwidth_mbps": 100,
+      "loss": 0
+    },
+    {
+      "a": "PC2:eth0",
+      "b": "SW1:p2",
+      "id": "L2",
+      "delay_ms": 5,
+      "bandwidth_mbps": 100,
+      "loss": 0
+    },
+    {
+      "a": "SW1:p3",
+      "b": "R1:lan",
+      "id": "L3",
+      "delay_ms": 5,
+      "bandwidth_mbps": 100,
+      "loss": 0
+    },
+    {
+      "a": "R1:wan",
+      "b": "WEB:eth0",
+      "id": "L4",
+      "delay_ms": 5,
+      "bandwidth_mbps": 100,
+      "loss": 0
+    }
+  ]
+}

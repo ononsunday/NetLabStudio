@@ -1,0 +1,2491 @@
+{
+  "source": "teaching_simulation",
+  "experiment": "TCP_loss_recovery",
+  "time_unit": "simulated_seconds",
+  "time_note": "事件时间从 0 开始，表示教学模型的模拟秒；不是实测时间。",
+  "config": {
+    "bytes_total": 8192,
+    "loss": 0.1,
+    "delay_ms": 30,
+    "jitter_ms": 5,
+    "bandwidth_mbps": 10,
+    "receive_window": 4096,
+    "seed": 4
+  },
+  "result": {
+    "protocol": "TCP",
+    "mode": "teaching_simulation",
+    "events": [
+      {
+        "time": 0.0,
+        "order": 1,
+        "kind": "TCP_STATE",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "client: CLOSED → SYN_SENT",
+        "data": {
+          "time": 0.0,
+          "side": "client",
+          "from": "CLOSED",
+          "to": "SYN_SENT"
+        },
+        "status": "processed",
+        "id": "event-00000001"
+      },
+      {
+        "time": 0.0,
+        "order": 2,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 SYN，SEQ=1000 ACK=0。",
+        "data": {
+          "flag": "SYN",
+          "sequence": 1000,
+          "cwnd": 512,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000002"
+      },
+      {
+        "time": 0.027392480897374345,
+        "order": 3,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "SYN 到达。",
+        "data": {
+          "flag": "SYN",
+          "sequence": 1000
+        },
+        "status": "processed",
+        "id": "event-00000003"
+      },
+      {
+        "time": 0.027392480897374345,
+        "order": 5,
+        "kind": "TCP_STATE",
+        "source": "server",
+        "target": "",
+        "packet_id": null,
+        "explanation": "server: LISTEN → SYN_RECEIVED",
+        "data": {
+          "time": 0.027392480897374345,
+          "side": "server",
+          "from": "LISTEN",
+          "to": "SYN_RECEIVED"
+        },
+        "status": "processed",
+        "id": "event-00000005"
+      },
+      {
+        "time": 0.027392480897374345,
+        "order": 6,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 SYN_ACK，SEQ=7000 ACK=1001。",
+        "data": {
+          "flag": "SYN_ACK",
+          "sequence": 7000,
+          "ack": 1001,
+          "cwnd": 512,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000006"
+      },
+      {
+        "time": 0.05638506332348116,
+        "order": 7,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "SYN_ACK 到达。",
+        "data": {
+          "flag": "SYN_ACK",
+          "sequence": 7000,
+          "ack": 1001
+        },
+        "status": "processed",
+        "id": "event-00000007"
+      },
+      {
+        "time": 0.05638506332348116,
+        "order": 9,
+        "kind": "TCP_STATE",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "client: SYN_SENT → ESTABLISHED",
+        "data": {
+          "time": 0.05638506332348116,
+          "side": "client",
+          "from": "SYN_SENT",
+          "to": "ESTABLISHED"
+        },
+        "status": "processed",
+        "id": "event-00000009"
+      },
+      {
+        "time": 0.05638506332348116,
+        "order": 10,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 HANDSHAKE_ACK，SEQ=1001 ACK=7001。",
+        "data": {
+          "flag": "HANDSHAKE_ACK",
+          "sequence": 1001,
+          "ack": 7001,
+          "cwnd": 512,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000010"
+      },
+      {
+        "time": 0.05638506332348116,
+        "order": 12,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=1001 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 1001,
+          "offset": 0,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 512,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000012"
+      },
+      {
+        "time": 0.08208221428027705,
+        "order": 11,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "HANDSHAKE_ACK 到达。",
+        "data": {
+          "flag": "HANDSHAKE_ACK",
+          "sequence": 1001,
+          "ack": 7001
+        },
+        "status": "processed",
+        "id": "event-00000011"
+      },
+      {
+        "time": 0.08208221428027705,
+        "order": 15,
+        "kind": "TCP_STATE",
+        "source": "server",
+        "target": "",
+        "packet_id": null,
+        "explanation": "server: SYN_RECEIVED → ESTABLISHED",
+        "data": {
+          "time": 0.08208221428027705,
+          "side": "server",
+          "from": "SYN_RECEIVED",
+          "to": "ESTABLISHED"
+        },
+        "status": "processed",
+        "id": "event-00000015"
+      },
+      {
+        "time": 0.09103821375435835,
+        "order": 13,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 1001,
+          "offset": 0,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000013"
+      },
+      {
+        "time": 0.09103821375435835,
+        "order": 16,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=1513。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 1513,
+          "offset": 512,
+          "cwnd": 512,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000016"
+      },
+      {
+        "time": 0.12372183977941273,
+        "order": 17,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 1513,
+          "offset": 512
+        },
+        "status": "processed",
+        "id": "event-00000017"
+      },
+      {
+        "time": 0.12372183977941273,
+        "order": 18,
+        "kind": "ACK_PROGRESS",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "累计确认 512/8192 字节；cwnd=1024。",
+        "data": {
+          "acked": 512,
+          "cwnd": 1024.0,
+          "srtt": 0.06733677645593157,
+          "rto": 0.20201032936779473
+        },
+        "status": "processed",
+        "id": "event-00000018"
+      },
+      {
+        "time": 0.12372183977941273,
+        "order": 19,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=1513 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 1513,
+          "offset": 512,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 1024,
+          "rwnd": 4096,
+          "rto": 0.20201032936779473
+        },
+        "status": "processed",
+        "id": "event-00000019"
+      },
+      {
+        "time": 0.12372183977941273,
+        "order": 22,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=2025 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 2025,
+          "offset": 1024,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 1024,
+          "rwnd": 4096,
+          "rto": 0.20201032936779473
+        },
+        "status": "processed",
+        "id": "event-00000022"
+      },
+      {
+        "time": 0.1513316850722664,
+        "order": 23,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 2025,
+          "offset": 1024,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000023"
+      },
+      {
+        "time": 0.1513316850722664,
+        "order": 25,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=1513。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 1513,
+          "offset": 512,
+          "cwnd": 1024,
+          "rwnd": 4096,
+          "rto": 0.20201032936779473
+        },
+        "status": "processed",
+        "id": "event-00000025"
+      },
+      {
+        "time": 0.15453023986116088,
+        "order": 20,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 1513,
+          "offset": 512,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000020"
+      },
+      {
+        "time": 0.15453023986116088,
+        "order": 27,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=2537。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 2537,
+          "offset": 1536,
+          "cwnd": 1024,
+          "rwnd": 4096,
+          "rto": 0.20201032936779473
+        },
+        "status": "processed",
+        "id": "event-00000027"
+      },
+      {
+        "time": 0.17850768939805556,
+        "order": 26,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 1513,
+          "offset": 512
+        },
+        "status": "processed",
+        "id": "event-00000026"
+      },
+      {
+        "time": 0.18785144034894508,
+        "order": 28,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 2537,
+          "offset": 1536
+        },
+        "status": "processed",
+        "id": "event-00000028"
+      },
+      {
+        "time": 0.18785144034894508,
+        "order": 29,
+        "kind": "ACK_PROGRESS",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "累计确认 1536/8192 字节；cwnd=1536。",
+        "data": {
+          "acked": 1536,
+          "cwnd": 1536.0,
+          "srtt": 0.06693587947013167,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000029"
+      },
+      {
+        "time": 0.18785144034894508,
+        "order": 30,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=2537 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 2537,
+          "offset": 1536,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 1536,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000030"
+      },
+      {
+        "time": 0.18785144034894508,
+        "order": 33,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=3049 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 3049,
+          "offset": 2048,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 1536,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000033"
+      },
+      {
+        "time": 0.18785144034894508,
+        "order": 36,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=3561 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 3561,
+          "offset": 2560,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 1536,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000036"
+      },
+      {
+        "time": 0.2,
+        "order": 4,
+        "kind": "CONTROL_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "flag": "SYN",
+          "attempt": 1,
+          "fields": {
+            "sequence": 1000
+          }
+        },
+        "status": "processed",
+        "id": "event-00000004"
+      },
+      {
+        "time": 0.21683313992194042,
+        "order": 34,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 3049,
+          "offset": 2048,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000034"
+      },
+      {
+        "time": 0.21683313992194042,
+        "order": 39,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=2537。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 2537,
+          "offset": 1536,
+          "cwnd": 1536,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000039"
+      },
+      {
+        "time": 0.22129751873437475,
+        "order": 31,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 2537,
+          "offset": 1536,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000031"
+      },
+      {
+        "time": 0.22129751873437475,
+        "order": 41,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=3561。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 3561,
+          "offset": 2560,
+          "cwnd": 1536,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000041"
+      },
+      {
+        "time": 0.22149518743773222,
+        "order": 37,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 3561,
+          "offset": 2560,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000037"
+      },
+      {
+        "time": 0.22149518743773222,
+        "order": 43,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=4073。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 4073,
+          "offset": 3072,
+          "cwnd": 1536,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000043"
+      },
+      {
+        "time": 0.22739248089737435,
+        "order": 8,
+        "kind": "CONTROL_TIMEOUT",
+        "source": "server",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "flag": "SYN_ACK",
+          "attempt": 1,
+          "fields": {
+            "sequence": 7000,
+            "ack": 1001
+          }
+        },
+        "status": "processed",
+        "id": "event-00000008"
+      },
+      {
+        "time": 0.2506656474355524,
+        "order": 40,
+        "kind": "PACKET_LOSS",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 在链路中丢失。",
+        "data": {
+          "sequence": 7001,
+          "ack": 2537,
+          "offset": 1536
+        },
+        "status": "processed",
+        "id": "event-00000040"
+      },
+      {
+        "time": 0.2515867251948364,
+        "order": 44,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 4073,
+          "offset": 3072
+        },
+        "status": "processed",
+        "id": "event-00000044"
+      },
+      {
+        "time": 0.2515867251948364,
+        "order": 45,
+        "kind": "ACK_PROGRESS",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "累计确认 3072/8192 字节；cwnd=2048。",
+        "data": {
+          "acked": 3072,
+          "cwnd": 2048.0,
+          "srtt": 0.06653580514210163,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000045"
+      },
+      {
+        "time": 0.2515867251948364,
+        "order": 46,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=4073 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 4073,
+          "offset": 3072,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 2048,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000046"
+      },
+      {
+        "time": 0.2515867251948364,
+        "order": 49,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=4585 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 4585,
+          "offset": 3584,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 2048,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000049"
+      },
+      {
+        "time": 0.2515867251948364,
+        "order": 52,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=5097 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 5097,
+          "offset": 4096,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 2048,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000052"
+      },
+      {
+        "time": 0.2515867251948364,
+        "order": 55,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=5609 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 5609,
+          "offset": 4608,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 2048,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000055"
+      },
+      {
+        "time": 0.2523880375715736,
+        "order": 42,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 3561,
+          "offset": 2560
+        },
+        "status": "processed",
+        "id": "event-00000042"
+      },
+      {
+        "time": 0.25638506332348115,
+        "order": 14,
+        "kind": "DATA_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "offset": 0,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000014"
+      },
+      {
+        "time": 0.2817642040706878,
+        "order": 47,
+        "kind": "PACKET_LOSS",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 在链路中丢失。",
+        "data": {
+          "sequence": 4073,
+          "offset": 3072,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000047"
+      },
+      {
+        "time": 0.2833879138907069,
+        "order": 53,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 5097,
+          "offset": 4096,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000053"
+      },
+      {
+        "time": 0.2833879138907069,
+        "order": 58,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=4073。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 4073,
+          "offset": 3072,
+          "cwnd": 2048,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000058"
+      },
+      {
+        "time": 0.28681580883383545,
+        "order": 50,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 4585,
+          "offset": 3584,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000050"
+      },
+      {
+        "time": 0.28681580883383545,
+        "order": 60,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=4073。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 4073,
+          "offset": 3072,
+          "cwnd": 2048,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000060"
+      },
+      {
+        "time": 0.2874418280889832,
+        "order": 56,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 5609,
+          "offset": 4608,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000056"
+      },
+      {
+        "time": 0.2874418280889832,
+        "order": 62,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=4073。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 4073,
+          "offset": 3072,
+          "cwnd": 2048,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000062"
+      },
+      {
+        "time": 0.31693153258716295,
+        "order": 61,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 4073,
+          "offset": 3072
+        },
+        "status": "processed",
+        "id": "event-00000061"
+      },
+      {
+        "time": 0.31724308628949477,
+        "order": 59,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 4073,
+          "offset": 3072
+        },
+        "status": "processed",
+        "id": "event-00000059"
+      },
+      {
+        "time": 0.3184629528108831,
+        "order": 63,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 4073,
+          "offset": 3072
+        },
+        "status": "processed",
+        "id": "event-00000063"
+      },
+      {
+        "time": 0.3184629528108831,
+        "order": 64,
+        "kind": "FAST_RETRANSMIT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "三个重复 ACK：重传最早未确认段，进入快速恢复。",
+        "data": {},
+        "status": "processed",
+        "id": "event-00000064"
+      },
+      {
+        "time": 0.3184629528108831,
+        "order": 65,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=4073 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 4073,
+          "offset": 3072,
+          "size": 512,
+          "attempt": 2,
+          "cwnd": 2560,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000065"
+      },
+      {
+        "time": 0.3257321691472075,
+        "order": 21,
+        "kind": "DATA_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "offset": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000021"
+      },
+      {
+        "time": 0.3257321691472075,
+        "order": 24,
+        "kind": "DATA_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "offset": 1024,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000024"
+      },
+      {
+        "time": 0.3455177588720992,
+        "order": 66,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 4073,
+          "offset": 3072,
+          "size": 512,
+          "attempt": 2
+        },
+        "status": "processed",
+        "id": "event-00000066"
+      },
+      {
+        "time": 0.3455177588720992,
+        "order": 68,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=6121。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 6121,
+          "offset": 5120,
+          "cwnd": 2560,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000068"
+      },
+      {
+        "time": 0.3786756820584454,
+        "order": 69,
+        "kind": "PACKET_LOSS",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 在链路中丢失。",
+        "data": {
+          "sequence": 7001,
+          "ack": 6121,
+          "offset": 5120
+        },
+        "status": "processed",
+        "id": "event-00000069"
+      },
+      {
+        "time": 0.3878514403489451,
+        "order": 32,
+        "kind": "DATA_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "offset": 1536,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000032"
+      },
+      {
+        "time": 0.3878514403489451,
+        "order": 35,
+        "kind": "DATA_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "offset": 2048,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000035"
+      },
+      {
+        "time": 0.3878514403489451,
+        "order": 38,
+        "kind": "DATA_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "offset": 2560,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000038"
+      },
+      {
+        "time": 0.4515867251948364,
+        "order": 48,
+        "kind": "DATA_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "offset": 3072,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000048"
+      },
+      {
+        "time": 0.4515867251948364,
+        "order": 51,
+        "kind": "DATA_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "offset": 3584,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000051"
+      },
+      {
+        "time": 0.4515867251948364,
+        "order": 54,
+        "kind": "DATA_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "offset": 4096,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000054"
+      },
+      {
+        "time": 0.4515867251948364,
+        "order": 57,
+        "kind": "DATA_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "offset": 4608,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000057"
+      },
+      {
+        "time": 0.4515867251948364,
+        "order": 70,
+        "kind": "RETRANSMIT_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "RTO 超时，cwnd 回到 1 MSS，进入慢启动。",
+        "data": {},
+        "status": "processed",
+        "id": "event-00000070"
+      },
+      {
+        "time": 0.4515867251948364,
+        "order": 71,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=4585 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 4585,
+          "offset": 3584,
+          "size": 512,
+          "attempt": 2,
+          "cwnd": 512,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000071"
+      },
+      {
+        "time": 0.4515867251948364,
+        "order": 74,
+        "kind": "RETRANSMIT_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "RTO 超时，cwnd 回到 1 MSS，进入慢启动。",
+        "data": {},
+        "status": "processed",
+        "id": "event-00000074"
+      },
+      {
+        "time": 0.4515867251948364,
+        "order": 75,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=5097 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 5097,
+          "offset": 4096,
+          "size": 512,
+          "attempt": 2,
+          "cwnd": 512,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000075"
+      },
+      {
+        "time": 0.4515867251948364,
+        "order": 78,
+        "kind": "RETRANSMIT_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "RTO 超时，cwnd 回到 1 MSS，进入慢启动。",
+        "data": {},
+        "status": "processed",
+        "id": "event-00000078"
+      },
+      {
+        "time": 0.4515867251948364,
+        "order": 79,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=5609 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 5609,
+          "offset": 4608,
+          "size": 512,
+          "attempt": 2,
+          "cwnd": 512,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000079"
+      },
+      {
+        "time": 0.4774915451848715,
+        "order": 72,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 4585,
+          "offset": 3584,
+          "size": 512,
+          "attempt": 2
+        },
+        "status": "processed",
+        "id": "event-00000072"
+      },
+      {
+        "time": 0.4774915451848715,
+        "order": 82,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=6121。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 6121,
+          "offset": 5120,
+          "cwnd": 512,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000082"
+      },
+      {
+        "time": 0.48027425731099854,
+        "order": 76,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 5097,
+          "offset": 4096,
+          "size": 512,
+          "attempt": 2
+        },
+        "status": "processed",
+        "id": "event-00000076"
+      },
+      {
+        "time": 0.48027425731099854,
+        "order": 84,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=6121。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 6121,
+          "offset": 5120,
+          "cwnd": 512,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000084"
+      },
+      {
+        "time": 0.4826239260559863,
+        "order": 80,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 5609,
+          "offset": 4608,
+          "size": 512,
+          "attempt": 2
+        },
+        "status": "processed",
+        "id": "event-00000080"
+      },
+      {
+        "time": 0.4826239260559863,
+        "order": 86,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=6121。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 6121,
+          "offset": 5120,
+          "cwnd": 512,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000086"
+      },
+      {
+        "time": 0.5094342038750718,
+        "order": 85,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 6121,
+          "offset": 5120
+        },
+        "status": "processed",
+        "id": "event-00000085"
+      },
+      {
+        "time": 0.5094342038750718,
+        "order": 88,
+        "kind": "ACK_PROGRESS",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "累计确认 5120/8192 字节；cwnd=1024。",
+        "data": {
+          "acked": 5120,
+          "cwnd": 1024.0,
+          "srtt": 0.06653580514210163,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000088"
+      },
+      {
+        "time": 0.5094342038750718,
+        "order": 89,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=6121 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 6121,
+          "offset": 5120,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 1024,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000089"
+      },
+      {
+        "time": 0.5094342038750718,
+        "order": 92,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=6633 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 6633,
+          "offset": 5632,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 1024,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000092"
+      },
+      {
+        "time": 0.5124963339265927,
+        "order": 83,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 6121,
+          "offset": 5120
+        },
+        "status": "processed",
+        "id": "event-00000083"
+      },
+      {
+        "time": 0.5139825758738965,
+        "order": 87,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 6121,
+          "offset": 5120
+        },
+        "status": "processed",
+        "id": "event-00000087"
+      },
+      {
+        "time": 0.5384341114211453,
+        "order": 90,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 6121,
+          "offset": 5120,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000090"
+      },
+      {
+        "time": 0.5384341114211453,
+        "order": 95,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=6633。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 6633,
+          "offset": 5632,
+          "cwnd": 1024,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000095"
+      },
+      {
+        "time": 0.5385240929075692,
+        "order": 93,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 6633,
+          "offset": 5632,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000093"
+      },
+      {
+        "time": 0.5385240929075692,
+        "order": 97,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=7145。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 7145,
+          "offset": 6144,
+          "cwnd": 1024,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000097"
+      },
+      {
+        "time": 0.5641721953279709,
+        "order": 98,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 7145,
+          "offset": 6144
+        },
+        "status": "processed",
+        "id": "event-00000098"
+      },
+      {
+        "time": 0.5641721953279709,
+        "order": 99,
+        "kind": "ACK_PROGRESS",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "累计确认 6144/8192 字节；cwnd=1280。",
+        "data": {
+          "acked": 6144,
+          "cwnd": 1280.0,
+          "srtt": 0.06506107843095132,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000099"
+      },
+      {
+        "time": 0.5641721953279709,
+        "order": 100,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=7145 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 7145,
+          "offset": 6144,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 1280,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000100"
+      },
+      {
+        "time": 0.5641721953279709,
+        "order": 103,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=7657 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 7657,
+          "offset": 6656,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 1280,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000103"
+      },
+      {
+        "time": 0.5725092624364518,
+        "order": 96,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 6633,
+          "offset": 5632
+        },
+        "status": "processed",
+        "id": "event-00000096"
+      },
+      {
+        "time": 0.5924295670262242,
+        "order": 104,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 7657,
+          "offset": 6656,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000104"
+      },
+      {
+        "time": 0.5924295670262242,
+        "order": 106,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=7145。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 7145,
+          "offset": 6144,
+          "cwnd": 1280,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000106"
+      },
+      {
+        "time": 0.5972654177412337,
+        "order": 101,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 7145,
+          "offset": 6144,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000101"
+      },
+      {
+        "time": 0.5972654177412337,
+        "order": 108,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=8169。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 8169,
+          "offset": 7168,
+          "cwnd": 1280,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000108"
+      },
+      {
+        "time": 0.6192369639611898,
+        "order": 107,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 7145,
+          "offset": 6144
+        },
+        "status": "processed",
+        "id": "event-00000107"
+      },
+      {
+        "time": 0.6227255296190538,
+        "order": 109,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 8169,
+          "offset": 7168
+        },
+        "status": "processed",
+        "id": "event-00000109"
+      },
+      {
+        "time": 0.6227255296190538,
+        "order": 110,
+        "kind": "ACK_PROGRESS",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "累计确认 7168/8192 字节；cwnd=1485。",
+        "data": {
+          "acked": 7168,
+          "cwnd": 1484.8,
+          "srtt": 0.06424761041346777,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000110"
+      },
+      {
+        "time": 0.6227255296190538,
+        "order": 111,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=8169 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 8169,
+          "offset": 7168,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 1485,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000111"
+      },
+      {
+        "time": 0.6227255296190538,
+        "order": 114,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 DATA，SEQ=8681 ACK=0。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 8681,
+          "offset": 7680,
+          "size": 512,
+          "attempt": 1,
+          "cwnd": 1485,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000114"
+      },
+      {
+        "time": 0.6559575091837931,
+        "order": 115,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 8681,
+          "offset": 7680,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000115"
+      },
+      {
+        "time": 0.6559575091837931,
+        "order": 117,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=8169。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 8169,
+          "offset": 7168,
+          "cwnd": 1485,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000117"
+      },
+      {
+        "time": 0.657126407410172,
+        "order": 112,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "DATA 到达。",
+        "data": {
+          "flag": "DATA",
+          "sequence": 8169,
+          "offset": 7168,
+          "size": 512,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000112"
+      },
+      {
+        "time": 0.657126407410172,
+        "order": 119,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 ACK，SEQ=7001 ACK=9193。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 9193,
+          "offset": 8192,
+          "cwnd": 1485,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000119"
+      },
+      {
+        "time": 0.6811713844367262,
+        "order": 118,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 8169,
+          "offset": 7168
+        },
+        "status": "processed",
+        "id": "event-00000118"
+      },
+      {
+        "time": 0.6918184749798533,
+        "order": 120,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "ACK 到达。",
+        "data": {
+          "flag": "ACK",
+          "sequence": 7001,
+          "ack": 9193,
+          "offset": 8192
+        },
+        "status": "processed",
+        "id": "event-00000120"
+      },
+      {
+        "time": 0.6918184749798533,
+        "order": 121,
+        "kind": "ACK_PROGRESS",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "累计确认 8192/8192 字节；cwnd=1661。",
+        "data": {
+          "acked": 8192,
+          "cwnd": 1661.351724137931,
+          "srtt": 0.06485327728188423,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000121"
+      },
+      {
+        "time": 0.6918184749798533,
+        "order": 122,
+        "kind": "TCP_STATE",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "client: ESTABLISHED → FIN_WAIT_1",
+        "data": {
+          "time": 0.6918184749798533,
+          "side": "client",
+          "from": "ESTABLISHED",
+          "to": "FIN_WAIT_1"
+        },
+        "status": "processed",
+        "id": "event-00000122"
+      },
+      {
+        "time": 0.6918184749798533,
+        "order": 123,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 FIN，SEQ=9193 ACK=7001。",
+        "data": {
+          "flag": "FIN",
+          "sequence": 9193,
+          "ack": 7001,
+          "cwnd": 1661,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000123"
+      },
+      {
+        "time": 0.7094342038750718,
+        "order": 91,
+        "kind": "DATA_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "offset": 5120,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000091"
+      },
+      {
+        "time": 0.7094342038750718,
+        "order": 94,
+        "kind": "DATA_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "offset": 5632,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000094"
+      },
+      {
+        "time": 0.7184629528108831,
+        "order": 67,
+        "kind": "DATA_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "offset": 3072,
+          "attempt": 2
+        },
+        "status": "processed",
+        "id": "event-00000067"
+      },
+      {
+        "time": 0.720954751790542,
+        "order": 124,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "FIN 到达。",
+        "data": {
+          "flag": "FIN",
+          "sequence": 9193,
+          "ack": 7001
+        },
+        "status": "processed",
+        "id": "event-00000124"
+      },
+      {
+        "time": 0.720954751790542,
+        "order": 126,
+        "kind": "TCP_STATE",
+        "source": "server",
+        "target": "",
+        "packet_id": null,
+        "explanation": "server: ESTABLISHED → CLOSE_WAIT",
+        "data": {
+          "time": 0.720954751790542,
+          "side": "server",
+          "from": "ESTABLISHED",
+          "to": "CLOSE_WAIT"
+        },
+        "status": "processed",
+        "id": "event-00000126"
+      },
+      {
+        "time": 0.720954751790542,
+        "order": 127,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 FIN_ACK，SEQ=1000 ACK=9194。",
+        "data": {
+          "flag": "FIN_ACK",
+          "ack": 9194,
+          "cwnd": 1661,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000127"
+      },
+      {
+        "time": 0.720954751790542,
+        "order": 129,
+        "kind": "TCP_STATE",
+        "source": "server",
+        "target": "",
+        "packet_id": null,
+        "explanation": "server: CLOSE_WAIT → LAST_ACK",
+        "data": {
+          "time": 0.720954751790542,
+          "side": "server",
+          "from": "CLOSE_WAIT",
+          "to": "LAST_ACK"
+        },
+        "status": "processed",
+        "id": "event-00000129"
+      },
+      {
+        "time": 0.720954751790542,
+        "order": 130,
+        "kind": "TCP_SEND",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "发送 SERVER_FIN，SEQ=7001 ACK=9194。",
+        "data": {
+          "flag": "SERVER_FIN",
+          "sequence": 7001,
+          "ack": 9194,
+          "cwnd": 1661,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000130"
+      },
+      {
+        "time": 0.7489528543271108,
+        "order": 131,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "SERVER_FIN 到达。",
+        "data": {
+          "flag": "SERVER_FIN",
+          "sequence": 7001,
+          "ack": 9194
+        },
+        "status": "processed",
+        "id": "event-00000131"
+      },
+      {
+        "time": 0.7489528543271108,
+        "order": 133,
+        "kind": "TCP_STATE",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "client: FIN_WAIT_1 → TIME_WAIT",
+        "data": {
+          "time": 0.7489528543271108,
+          "side": "client",
+          "from": "FIN_WAIT_1",
+          "to": "TIME_WAIT"
+        },
+        "status": "processed",
+        "id": "event-00000133"
+      },
+      {
+        "time": 0.7489528543271108,
+        "order": 134,
+        "kind": "TCP_SEND",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "发送 LAST_ACK，SEQ=9194 ACK=7002。",
+        "data": {
+          "flag": "LAST_ACK",
+          "ack": 7002,
+          "sequence": 9194,
+          "cwnd": 1661,
+          "rwnd": 4096,
+          "rto": 0.2
+        },
+        "status": "processed",
+        "id": "event-00000134"
+      },
+      {
+        "time": 0.7521918565051773,
+        "order": 128,
+        "kind": "TCP_ARRIVE",
+        "source": "server",
+        "target": "client",
+        "packet_id": null,
+        "explanation": "FIN_ACK 到达。",
+        "data": {
+          "flag": "FIN_ACK",
+          "ack": 9194
+        },
+        "status": "processed",
+        "id": "event-00000128"
+      },
+      {
+        "time": 0.764172195327971,
+        "order": 102,
+        "kind": "DATA_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "offset": 6144,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000102"
+      },
+      {
+        "time": 0.764172195327971,
+        "order": 105,
+        "kind": "DATA_TIMEOUT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "",
+        "data": {
+          "offset": 6656,
+          "attempt": 1
+        },
+        "status": "processed",
+        "id": "event-00000105"
+      },
+      {
+        "time": 0.7784262767219225,
+        "order": 135,
+        "kind": "TCP_ARRIVE",
+        "source": "client",
+        "target": "server",
+        "packet_id": null,
+        "explanation": "LAST_ACK 到达。",
+        "data": {
+          "flag": "LAST_ACK",
+          "ack": 7002,
+          "sequence": 9194
+        },
+        "status": "processed",
+        "id": "event-00000135"
+      },
+      {
+        "time": 0.7784262767219225,
+        "order": 136,
+        "kind": "TCP_STATE",
+        "source": "server",
+        "target": "",
+        "packet_id": null,
+        "explanation": "server: LAST_ACK → CLOSED",
+        "data": {
+          "time": 0.7784262767219225,
+          "side": "server",
+          "from": "LAST_ACK",
+          "to": "CLOSED"
+        },
+        "status": "processed",
+        "id": "event-00000136"
+      },
+      {
+        "time": 0.7784262767219225,
+        "order": 137,
+        "kind": "TIME_WAIT",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "保持 TIME_WAIT 以处理重复 FIN；真实等待与 MSL 有关，本实验不按真实秒数等待。",
+        "data": {},
+        "status": "processed",
+        "id": "event-00000137"
+      },
+      {
+        "time": 0.7784262767219225,
+        "order": 138,
+        "kind": "TCP_STATE",
+        "source": "client",
+        "target": "",
+        "packet_id": null,
+        "explanation": "client: TIME_WAIT → CLOSED",
+        "data": {
+          "time": 0.7784262767219225,
+          "side": "client",
+          "from": "TIME_WAIT",
+          "to": "CLOSED"
+        },
+        "status": "processed",
+        "id": "event-00000138"
+      }
+    ],
+    "states": {
+      "client": "CLOSED",
+      "server": "CLOSED"
+    },
+    "state_history": [
+      {
+        "time": 0.0,
+        "side": "client",
+        "from": "CLOSED",
+        "to": "SYN_SENT"
+      },
+      {
+        "time": 0.027392480897374345,
+        "side": "server",
+        "from": "LISTEN",
+        "to": "SYN_RECEIVED"
+      },
+      {
+        "time": 0.05638506332348116,
+        "side": "client",
+        "from": "SYN_SENT",
+        "to": "ESTABLISHED"
+      },
+      {
+        "time": 0.08208221428027705,
+        "side": "server",
+        "from": "SYN_RECEIVED",
+        "to": "ESTABLISHED"
+      },
+      {
+        "time": 0.6918184749798533,
+        "side": "client",
+        "from": "ESTABLISHED",
+        "to": "FIN_WAIT_1"
+      },
+      {
+        "time": 0.720954751790542,
+        "side": "server",
+        "from": "ESTABLISHED",
+        "to": "CLOSE_WAIT"
+      },
+      {
+        "time": 0.720954751790542,
+        "side": "server",
+        "from": "CLOSE_WAIT",
+        "to": "LAST_ACK"
+      },
+      {
+        "time": 0.7489528543271108,
+        "side": "client",
+        "from": "FIN_WAIT_1",
+        "to": "TIME_WAIT"
+      },
+      {
+        "time": 0.7784262767219225,
+        "side": "server",
+        "from": "LAST_ACK",
+        "to": "CLOSED"
+      },
+      {
+        "time": 0.7784262767219225,
+        "side": "client",
+        "from": "TIME_WAIT",
+        "to": "CLOSED"
+      }
+    ],
+    "window_history": [
+      {
+        "time": 0.05638506332348116,
+        "cwnd": 512.0,
+        "rwnd": 4096,
+        "in_flight": 512,
+        "acked": 0,
+        "rto": 0.2
+      },
+      {
+        "time": 0.12372183977941273,
+        "cwnd": 1024.0,
+        "rwnd": 4096,
+        "in_flight": 1024,
+        "acked": 512,
+        "rto": 0.20201032936779473
+      },
+      {
+        "time": 0.18785144034894508,
+        "cwnd": 1536.0,
+        "rwnd": 4096,
+        "in_flight": 1536,
+        "acked": 1536,
+        "rto": 0.2
+      },
+      {
+        "time": 0.2515867251948364,
+        "cwnd": 2048.0,
+        "rwnd": 4096,
+        "in_flight": 2048,
+        "acked": 3072,
+        "rto": 0.2
+      },
+      {
+        "time": 0.5094342038750718,
+        "cwnd": 1024.0,
+        "rwnd": 4096,
+        "in_flight": 1024,
+        "acked": 5120,
+        "rto": 0.2
+      },
+      {
+        "time": 0.5641721953279709,
+        "cwnd": 1280.0,
+        "rwnd": 4096,
+        "in_flight": 1024,
+        "acked": 6144,
+        "rto": 0.2
+      },
+      {
+        "time": 0.6227255296190538,
+        "cwnd": 1484.8,
+        "rwnd": 4096,
+        "in_flight": 1024,
+        "acked": 7168,
+        "rto": 0.2
+      }
+    ],
+    "metrics": {
+      "requested_bytes": 8192,
+      "delivered_bytes": 8192,
+      "acknowledged_bytes": 8192,
+      "duration_ms": 778.4262767219226,
+      "goodput_mbps": 0.08419037481106441,
+      "transmissions": 46,
+      "lost_packets": 3,
+      "retransmissions": 4,
+      "srtt_ms": 64.85327728188423,
+      "rto_ms": 200.0,
+      "success": true
+    },
+    "note": "Reno 风格模型：累计 ACK、滑动窗口、慢启动、拥塞避免、快速重传/恢复及 Karn RTT 采样。未实现 SACK、延迟 ACK、Keepalive 探测和生产 TCP 的全部状态；TIME_WAIT 不按真实 MSL 等待。"
+  }
+}

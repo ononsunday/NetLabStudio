@@ -1,0 +1,4287 @@
+{
+  "source": "teaching_simulation",
+  "experiment": "CPU_virtual_network_echo",
+  "time_unit": "simulated_seconds",
+  "time_note": "事件时间从 0 开始，表示教学模型的模拟秒；不是实测时间。",
+  "config": {
+    "assembly": "MOV R0, 72\nSTORE 10, R0\nMOV R0, 105\nSTORE 11, R0\nSEND 10, 2\nHALT",
+    "topology": {
+      "name": "示例：home",
+      "mode": "teaching_simulation",
+      "nodes": [
+        {
+          "id": "PC1",
+          "name": "PC1",
+          "type": "pc",
+          "x": 70,
+          "y": 90,
+          "interfaces": [
+            {
+              "name": "eth0",
+              "ip": "192.168.1.10/24"
+            }
+          ],
+          "gateway": "192.168.1.1"
+        },
+        {
+          "id": "PC2",
+          "name": "PC2",
+          "type": "laptop",
+          "x": 70,
+          "y": 270,
+          "interfaces": [
+            {
+              "name": "eth0",
+              "ip": "192.168.1.20/24"
+            }
+          ],
+          "gateway": "192.168.1.1"
+        },
+        {
+          "id": "SW1",
+          "name": "SW1",
+          "type": "switch",
+          "x": 310,
+          "y": 180,
+          "interfaces": [
+            {
+              "name": "p1",
+              "ip": ""
+            },
+            {
+              "name": "p2",
+              "ip": ""
+            },
+            {
+              "name": "p3",
+              "ip": ""
+            }
+          ]
+        },
+        {
+          "id": "R1",
+          "name": "R1",
+          "type": "router",
+          "x": 530,
+          "y": 180,
+          "interfaces": [
+            {
+              "name": "lan",
+              "ip": "192.168.1.1/24"
+            },
+            {
+              "name": "wan",
+              "ip": "203.0.113.1/24"
+            }
+          ],
+          "dhcp": {
+            "network": "192.168.1.0/24",
+            "gateway": "192.168.1.1",
+            "start": 100,
+            "end": 199
+          },
+          "nat": {
+            "public_ip": "203.0.113.1",
+            "outside": "wan"
+          }
+        },
+        {
+          "id": "WEB",
+          "name": "WEB",
+          "type": "server",
+          "x": 760,
+          "y": 180,
+          "interfaces": [
+            {
+              "name": "eth0",
+              "ip": "203.0.113.10/24"
+            }
+          ],
+          "gateway": "203.0.113.1"
+        }
+      ],
+      "links": [
+        {
+          "a": "PC1:eth0",
+          "b": "SW1:p1",
+          "id": "L1",
+          "delay_ms": 5,
+          "bandwidth_mbps": 100,
+          "loss": 0
+        },
+        {
+          "a": "PC2:eth0",
+          "b": "SW1:p2",
+          "id": "L2",
+          "delay_ms": 5,
+          "bandwidth_mbps": 100,
+          "loss": 0
+        },
+        {
+          "a": "SW1:p3",
+          "b": "R1:lan",
+          "id": "L3",
+          "delay_ms": 5,
+          "bandwidth_mbps": 100,
+          "loss": 0
+        },
+        {
+          "a": "R1:wan",
+          "b": "WEB:eth0",
+          "id": "L4",
+          "delay_ms": 5,
+          "bandwidth_mbps": 100,
+          "loss": 0
+        }
+      ]
+    },
+    "source": "PC1",
+    "target": "WEB",
+    "seed": 1,
+    "max_steps": 1000,
+    "receive_address": 128
+  },
+  "result": {
+    "mode": "teaching_simulation",
+    "teaching_model": true,
+    "events": [
+      {
+        "id": "integrated-00000001",
+        "time": 0.0,
+        "kind": "cpu.fetch",
+        "source": "cpu",
+        "target": "cpu",
+        "packet_id": null,
+        "status": "completed",
+        "explanation": "PC=0 取指：MOV R0, 72",
+        "data": {
+          "pc": 0
+        },
+        "teaching_model": true,
+        "original_id": "cpu-1"
+      },
+      {
+        "id": "integrated-00000002",
+        "time": 0.001,
+        "kind": "cpu.fetch",
+        "source": "cpu",
+        "target": "cpu",
+        "packet_id": null,
+        "status": "completed",
+        "explanation": "PC=1 取指：STORE 10, R0",
+        "data": {
+          "pc": 1
+        },
+        "teaching_model": true,
+        "original_id": "cpu-2"
+      },
+      {
+        "id": "integrated-00000003",
+        "time": 0.001,
+        "kind": "memory.write",
+        "source": "cpu",
+        "target": "memory",
+        "packet_id": null,
+        "status": "completed",
+        "explanation": "写入地址 10",
+        "data": {
+          "address": 10,
+          "value": 72
+        },
+        "teaching_model": true,
+        "original_id": "cpu-3"
+      },
+      {
+        "id": "integrated-00000004",
+        "time": 0.004,
+        "kind": "cpu.fetch",
+        "source": "cpu",
+        "target": "cpu",
+        "packet_id": null,
+        "status": "completed",
+        "explanation": "PC=2 取指：MOV R0, 105",
+        "data": {
+          "pc": 2
+        },
+        "teaching_model": true,
+        "original_id": "cpu-4"
+      },
+      {
+        "id": "integrated-00000005",
+        "time": 0.005,
+        "kind": "cpu.fetch",
+        "source": "cpu",
+        "target": "cpu",
+        "packet_id": null,
+        "status": "completed",
+        "explanation": "PC=3 取指：STORE 11, R0",
+        "data": {
+          "pc": 3
+        },
+        "teaching_model": true,
+        "original_id": "cpu-5"
+      },
+      {
+        "id": "integrated-00000006",
+        "time": 0.005,
+        "kind": "memory.write",
+        "source": "cpu",
+        "target": "memory",
+        "packet_id": null,
+        "status": "completed",
+        "explanation": "写入地址 11",
+        "data": {
+          "address": 11,
+          "value": 105
+        },
+        "teaching_model": true,
+        "original_id": "cpu-6"
+      },
+      {
+        "id": "integrated-00000007",
+        "time": 0.008,
+        "kind": "nic.dma",
+        "source": "memory",
+        "target": "nic",
+        "packet_id": "packet-000001",
+        "status": "completed",
+        "explanation": "教学网卡 DMA 读取发送缓冲区",
+        "data": {
+          "cpu_message_id": "message-1"
+        },
+        "teaching_model": true,
+        "original_id": "cpu-10"
+      },
+      {
+        "id": "integrated-00000008",
+        "time": 0.008,
+        "kind": "network.send",
+        "source": "nic",
+        "target": "virtual-network",
+        "packet_id": "packet-000001",
+        "status": "completed",
+        "explanation": "将虚拟消息交给模拟网络；未发送到真实网卡",
+        "data": {
+          "payload_hex": "4869",
+          "cpu_message_id": "message-1"
+        },
+        "teaching_model": true,
+        "original_id": "cpu-11"
+      },
+      {
+        "id": "integrated-00000009",
+        "time": 0.008,
+        "kind": "cpu.fetch",
+        "source": "cpu",
+        "target": "cpu",
+        "packet_id": null,
+        "status": "completed",
+        "explanation": "PC=4 取指：SEND 10, 2",
+        "data": {
+          "pc": 4
+        },
+        "teaching_model": true,
+        "original_id": "cpu-7"
+      },
+      {
+        "id": "integrated-00000010",
+        "time": 0.008,
+        "kind": "os.syscall",
+        "source": "cpu",
+        "target": "os",
+        "packet_id": "packet-000001",
+        "status": "completed",
+        "explanation": "SEND 进入内核态，地址=10，长度=2",
+        "data": {
+          "address": 10,
+          "length": 2,
+          "cpu_message_id": "message-1"
+        },
+        "teaching_model": true,
+        "original_id": "cpu-8"
+      },
+      {
+        "id": "integrated-00000011",
+        "time": 0.008,
+        "kind": "os.socket_buffer",
+        "source": "os",
+        "target": "socket-buffer",
+        "packet_id": "packet-000001",
+        "status": "completed",
+        "explanation": "教学内核将应用数据复制到 Socket 发送缓冲区",
+        "data": {
+          "payload_hex": "4869",
+          "cpu_message_id": "message-1"
+        },
+        "teaching_model": true,
+        "original_id": "cpu-9"
+      },
+      {
+        "time": 0.008,
+        "order": 1,
+        "kind": "IP_SEND",
+        "source": "PC1",
+        "target": "203.0.113.10",
+        "packet_id": "packet-000001",
+        "explanation": "应用数据交给虚拟 IP 协议栈。",
+        "data": {
+          "node": "PC1"
+        },
+        "status": "processed",
+        "id": "integrated-00000012",
+        "original_id": "event-00000001",
+        "teaching_model": true
+      },
+      {
+        "time": 0.008,
+        "order": 2,
+        "kind": "ROUTE",
+        "source": "PC1",
+        "target": "192.168.1.1",
+        "packet_id": "packet-000001",
+        "explanation": "最长前缀匹配选择 eth0，下一跳 192.168.1.1。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000013",
+        "original_id": "event-00000002",
+        "teaching_model": true
+      },
+      {
+        "time": 0.008,
+        "order": 3,
+        "kind": "ARP_REQUEST",
+        "source": "PC1",
+        "target": "192.168.1.1",
+        "packet_id": "packet-000002",
+        "explanation": "广播查询下一跳 MAC。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000014",
+        "original_id": "event-00000003",
+        "teaching_model": true
+      },
+      {
+        "time": 0.008,
+        "order": 4,
+        "kind": "FRAME_SEND",
+        "source": "PC1",
+        "target": "SW1",
+        "packet_id": "packet-000002",
+        "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+        "data": {
+          "link": "L1",
+          "packet_id": "packet-000002",
+          "source_mac": "02:00:00:01:00:00",
+          "destination_mac": "ff:ff:ff:ff:ff:ff",
+          "vlan": 1,
+          "tagged": false
+        },
+        "status": "processed",
+        "id": "integrated-00000015",
+        "original_id": "event-00000004",
+        "teaching_model": true
+      },
+      {
+        "time": 0.01300512,
+        "order": 5,
+        "kind": "FRAME_RECEIVE",
+        "source": "PC1",
+        "target": "SW1",
+        "packet_id": "packet-000002",
+        "explanation": "完整虚拟帧到达链路另一端。",
+        "data": {
+          "ingress": "SW1:p1",
+          "link": "L1",
+          "frame": {
+            "packet_id": "packet-000002",
+            "source_mac": "02:00:00:01:00:00",
+            "destination_mac": "ff:ff:ff:ff:ff:ff",
+            "vlan": 1,
+            "tagged": false
+          }
+        },
+        "status": "processed",
+        "id": "integrated-00000016",
+        "original_id": "event-00000005",
+        "teaching_model": true
+      },
+      {
+        "time": 0.01300512,
+        "order": 7,
+        "kind": "MAC_LEARN",
+        "source": "SW1",
+        "target": "",
+        "packet_id": "packet-000002",
+        "explanation": "从源 MAC 学习 VLAN 1：02:00:00:01:00:00 → p1。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000017",
+        "original_id": "event-00000007",
+        "teaching_model": true
+      },
+      {
+        "time": 0.01300512,
+        "order": 8,
+        "kind": "SWITCH_FLOOD",
+        "source": "SW1",
+        "target": "p2",
+        "packet_id": "packet-000002",
+        "explanation": "目的 MAC 未知或广播，在 VLAN 1 内泛洪。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000018",
+        "original_id": "event-00000008",
+        "teaching_model": true
+      },
+      {
+        "time": 0.01300512,
+        "order": 9,
+        "kind": "FRAME_SEND",
+        "source": "SW1",
+        "target": "PC2",
+        "packet_id": "packet-000002",
+        "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+        "data": {
+          "link": "L2",
+          "packet_id": "packet-000002",
+          "source_mac": "02:00:00:01:00:00",
+          "destination_mac": "ff:ff:ff:ff:ff:ff",
+          "vlan": 1,
+          "tagged": false
+        },
+        "status": "processed",
+        "id": "integrated-00000019",
+        "original_id": "event-00000009",
+        "teaching_model": true
+      },
+      {
+        "time": 0.01300512,
+        "order": 11,
+        "kind": "SWITCH_FLOOD",
+        "source": "SW1",
+        "target": "p3",
+        "packet_id": "packet-000002",
+        "explanation": "目的 MAC 未知或广播，在 VLAN 1 内泛洪。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000020",
+        "original_id": "event-00000011",
+        "teaching_model": true
+      },
+      {
+        "time": 0.01300512,
+        "order": 12,
+        "kind": "FRAME_SEND",
+        "source": "SW1",
+        "target": "R1",
+        "packet_id": "packet-000002",
+        "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+        "data": {
+          "link": "L3",
+          "packet_id": "packet-000002",
+          "source_mac": "02:00:00:01:00:00",
+          "destination_mac": "ff:ff:ff:ff:ff:ff",
+          "vlan": 1,
+          "tagged": false
+        },
+        "status": "processed",
+        "id": "integrated-00000021",
+        "original_id": "event-00000012",
+        "teaching_model": true
+      },
+      {
+        "time": 0.01801024,
+        "order": 10,
+        "kind": "FRAME_RECEIVE",
+        "source": "SW1",
+        "target": "PC2",
+        "packet_id": "packet-000002",
+        "explanation": "完整虚拟帧到达链路另一端。",
+        "data": {
+          "ingress": "PC2:eth0",
+          "link": "L2",
+          "frame": {
+            "packet_id": "packet-000002",
+            "source_mac": "02:00:00:01:00:00",
+            "destination_mac": "ff:ff:ff:ff:ff:ff",
+            "vlan": 1,
+            "tagged": false
+          }
+        },
+        "status": "processed",
+        "id": "integrated-00000022",
+        "original_id": "event-00000010",
+        "teaching_model": true
+      },
+      {
+        "time": 0.01801024,
+        "order": 13,
+        "kind": "FRAME_RECEIVE",
+        "source": "SW1",
+        "target": "R1",
+        "packet_id": "packet-000002",
+        "explanation": "完整虚拟帧到达链路另一端。",
+        "data": {
+          "ingress": "R1:lan",
+          "link": "L3",
+          "frame": {
+            "packet_id": "packet-000002",
+            "source_mac": "02:00:00:01:00:00",
+            "destination_mac": "ff:ff:ff:ff:ff:ff",
+            "vlan": 1,
+            "tagged": false
+          }
+        },
+        "status": "processed",
+        "id": "integrated-00000023",
+        "original_id": "event-00000013",
+        "teaching_model": true
+      },
+      {
+        "time": 0.01801024,
+        "order": 14,
+        "kind": "ARP_REPLY",
+        "source": "R1",
+        "target": "PC1",
+        "packet_id": "packet-000003",
+        "explanation": "返回本接口 MAC 地址。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000024",
+        "original_id": "event-00000014",
+        "teaching_model": true
+      },
+      {
+        "time": 0.01801024,
+        "order": 15,
+        "kind": "FRAME_SEND",
+        "source": "R1",
+        "target": "SW1",
+        "packet_id": "packet-000003",
+        "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+        "data": {
+          "link": "L3",
+          "packet_id": "packet-000003",
+          "source_mac": "02:00:00:04:00:00",
+          "destination_mac": "02:00:00:01:00:00",
+          "vlan": 1,
+          "tagged": false
+        },
+        "status": "processed",
+        "id": "integrated-00000025",
+        "original_id": "event-00000015",
+        "teaching_model": true
+      },
+      {
+        "time": 0.02301536,
+        "order": 16,
+        "kind": "FRAME_RECEIVE",
+        "source": "R1",
+        "target": "SW1",
+        "packet_id": "packet-000003",
+        "explanation": "完整虚拟帧到达链路另一端。",
+        "data": {
+          "ingress": "SW1:p3",
+          "link": "L3",
+          "frame": {
+            "packet_id": "packet-000003",
+            "source_mac": "02:00:00:04:00:00",
+            "destination_mac": "02:00:00:01:00:00",
+            "vlan": 1,
+            "tagged": false
+          }
+        },
+        "status": "processed",
+        "id": "integrated-00000026",
+        "original_id": "event-00000016",
+        "teaching_model": true
+      },
+      {
+        "time": 0.02301536,
+        "order": 17,
+        "kind": "MAC_LEARN",
+        "source": "SW1",
+        "target": "",
+        "packet_id": "packet-000003",
+        "explanation": "从源 MAC 学习 VLAN 1：02:00:00:04:00:00 → p3。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000027",
+        "original_id": "event-00000017",
+        "teaching_model": true
+      },
+      {
+        "time": 0.02301536,
+        "order": 18,
+        "kind": "SWITCH_FORWARD",
+        "source": "SW1",
+        "target": "p1",
+        "packet_id": "packet-000003",
+        "explanation": "查表单播转发。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000028",
+        "original_id": "event-00000018",
+        "teaching_model": true
+      },
+      {
+        "time": 0.02301536,
+        "order": 19,
+        "kind": "FRAME_SEND",
+        "source": "SW1",
+        "target": "PC1",
+        "packet_id": "packet-000003",
+        "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+        "data": {
+          "link": "L1",
+          "packet_id": "packet-000003",
+          "source_mac": "02:00:00:04:00:00",
+          "destination_mac": "02:00:00:01:00:00",
+          "vlan": 1,
+          "tagged": false
+        },
+        "status": "processed",
+        "id": "integrated-00000029",
+        "original_id": "event-00000019",
+        "teaching_model": true
+      },
+      {
+        "time": 0.02802048,
+        "order": 20,
+        "kind": "FRAME_RECEIVE",
+        "source": "SW1",
+        "target": "PC1",
+        "packet_id": "packet-000003",
+        "explanation": "完整虚拟帧到达链路另一端。",
+        "data": {
+          "ingress": "PC1:eth0",
+          "link": "L1",
+          "frame": {
+            "packet_id": "packet-000003",
+            "source_mac": "02:00:00:04:00:00",
+            "destination_mac": "02:00:00:01:00:00",
+            "vlan": 1,
+            "tagged": false
+          }
+        },
+        "status": "processed",
+        "id": "integrated-00000030",
+        "original_id": "event-00000020",
+        "teaching_model": true
+      },
+      {
+        "time": 0.02802048,
+        "order": 21,
+        "kind": "FRAME_SEND",
+        "source": "PC1",
+        "target": "SW1",
+        "packet_id": "packet-000001",
+        "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+        "data": {
+          "link": "L1",
+          "packet_id": "packet-000001",
+          "source_mac": "02:00:00:01:00:00",
+          "destination_mac": "02:00:00:04:00:00",
+          "vlan": 1,
+          "tagged": false
+        },
+        "status": "processed",
+        "id": "integrated-00000031",
+        "original_id": "event-00000021",
+        "teaching_model": true
+      },
+      {
+        "time": 0.0330256,
+        "order": 22,
+        "kind": "FRAME_RECEIVE",
+        "source": "PC1",
+        "target": "SW1",
+        "packet_id": "packet-000001",
+        "explanation": "完整虚拟帧到达链路另一端。",
+        "data": {
+          "ingress": "SW1:p1",
+          "link": "L1",
+          "frame": {
+            "packet_id": "packet-000001",
+            "source_mac": "02:00:00:01:00:00",
+            "destination_mac": "02:00:00:04:00:00",
+            "vlan": 1,
+            "tagged": false
+          }
+        },
+        "status": "processed",
+        "id": "integrated-00000032",
+        "original_id": "event-00000022",
+        "teaching_model": true
+      },
+      {
+        "time": 0.0330256,
+        "order": 23,
+        "kind": "MAC_LEARN",
+        "source": "SW1",
+        "target": "",
+        "packet_id": "packet-000001",
+        "explanation": "从源 MAC 学习 VLAN 1：02:00:00:01:00:00 → p1。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000033",
+        "original_id": "event-00000023",
+        "teaching_model": true
+      },
+      {
+        "time": 0.0330256,
+        "order": 24,
+        "kind": "SWITCH_FORWARD",
+        "source": "SW1",
+        "target": "p3",
+        "packet_id": "packet-000001",
+        "explanation": "查表单播转发。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000034",
+        "original_id": "event-00000024",
+        "teaching_model": true
+      },
+      {
+        "time": 0.0330256,
+        "order": 25,
+        "kind": "FRAME_SEND",
+        "source": "SW1",
+        "target": "R1",
+        "packet_id": "packet-000001",
+        "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+        "data": {
+          "link": "L3",
+          "packet_id": "packet-000001",
+          "source_mac": "02:00:00:01:00:00",
+          "destination_mac": "02:00:00:04:00:00",
+          "vlan": 1,
+          "tagged": false
+        },
+        "status": "processed",
+        "id": "integrated-00000035",
+        "original_id": "event-00000025",
+        "teaching_model": true
+      },
+      {
+        "time": 0.038030720000000004,
+        "order": 26,
+        "kind": "FRAME_RECEIVE",
+        "source": "SW1",
+        "target": "R1",
+        "packet_id": "packet-000001",
+        "explanation": "完整虚拟帧到达链路另一端。",
+        "data": {
+          "ingress": "R1:lan",
+          "link": "L3",
+          "frame": {
+            "packet_id": "packet-000001",
+            "source_mac": "02:00:00:01:00:00",
+            "destination_mac": "02:00:00:04:00:00",
+            "vlan": 1,
+            "tagged": false
+          }
+        },
+        "status": "processed",
+        "id": "integrated-00000036",
+        "original_id": "event-00000026",
+        "teaching_model": true
+      },
+      {
+        "time": 0.038030720000000004,
+        "order": 27,
+        "kind": "ROUTE",
+        "source": "R1",
+        "target": "203.0.113.10",
+        "packet_id": "packet-000001",
+        "explanation": "最长前缀匹配选择 wan，下一跳 203.0.113.10。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000037",
+        "original_id": "event-00000027",
+        "teaching_model": true
+      },
+      {
+        "time": 0.038030720000000004,
+        "order": 28,
+        "kind": "NAT_OUT",
+        "source": "R1",
+        "target": "203.0.113.10",
+        "packet_id": "packet-000001",
+        "explanation": "PAT 改写源地址和源端口。",
+        "data": {
+          "protocol": "UDP",
+          "private_ip": "192.168.1.10",
+          "private_port": 50000,
+          "public_ip": "203.0.113.1",
+          "public_port": 40000,
+          "expires": 120.03803072
+        },
+        "status": "processed",
+        "id": "integrated-00000038",
+        "original_id": "event-00000028",
+        "teaching_model": true
+      },
+      {
+        "time": 0.038030720000000004,
+        "order": 29,
+        "kind": "ARP_REQUEST",
+        "source": "R1",
+        "target": "203.0.113.10",
+        "packet_id": "packet-000004",
+        "explanation": "广播查询下一跳 MAC。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000039",
+        "original_id": "event-00000029",
+        "teaching_model": true
+      },
+      {
+        "time": 0.038030720000000004,
+        "order": 30,
+        "kind": "FRAME_SEND",
+        "source": "R1",
+        "target": "WEB",
+        "packet_id": "packet-000004",
+        "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+        "data": {
+          "link": "L4",
+          "packet_id": "packet-000004",
+          "source_mac": "02:00:00:04:00:01",
+          "destination_mac": "ff:ff:ff:ff:ff:ff",
+          "vlan": 1,
+          "tagged": false
+        },
+        "status": "processed",
+        "id": "integrated-00000040",
+        "original_id": "event-00000030",
+        "teaching_model": true
+      },
+      {
+        "time": 0.043035840000000006,
+        "order": 31,
+        "kind": "FRAME_RECEIVE",
+        "source": "R1",
+        "target": "WEB",
+        "packet_id": "packet-000004",
+        "explanation": "完整虚拟帧到达链路另一端。",
+        "data": {
+          "ingress": "WEB:eth0",
+          "link": "L4",
+          "frame": {
+            "packet_id": "packet-000004",
+            "source_mac": "02:00:00:04:00:01",
+            "destination_mac": "ff:ff:ff:ff:ff:ff",
+            "vlan": 1,
+            "tagged": false
+          }
+        },
+        "status": "processed",
+        "id": "integrated-00000041",
+        "original_id": "event-00000031",
+        "teaching_model": true
+      },
+      {
+        "time": 0.043035840000000006,
+        "order": 33,
+        "kind": "ARP_REPLY",
+        "source": "WEB",
+        "target": "R1",
+        "packet_id": "packet-000005",
+        "explanation": "返回本接口 MAC 地址。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000042",
+        "original_id": "event-00000033",
+        "teaching_model": true
+      },
+      {
+        "time": 0.043035840000000006,
+        "order": 34,
+        "kind": "FRAME_SEND",
+        "source": "WEB",
+        "target": "R1",
+        "packet_id": "packet-000005",
+        "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+        "data": {
+          "link": "L4",
+          "packet_id": "packet-000005",
+          "source_mac": "02:00:00:05:00:00",
+          "destination_mac": "02:00:00:04:00:01",
+          "vlan": 1,
+          "tagged": false
+        },
+        "status": "processed",
+        "id": "integrated-00000043",
+        "original_id": "event-00000034",
+        "teaching_model": true
+      },
+      {
+        "time": 0.04804096000000001,
+        "order": 35,
+        "kind": "FRAME_RECEIVE",
+        "source": "WEB",
+        "target": "R1",
+        "packet_id": "packet-000005",
+        "explanation": "完整虚拟帧到达链路另一端。",
+        "data": {
+          "ingress": "R1:wan",
+          "link": "L4",
+          "frame": {
+            "packet_id": "packet-000005",
+            "source_mac": "02:00:00:05:00:00",
+            "destination_mac": "02:00:00:04:00:01",
+            "vlan": 1,
+            "tagged": false
+          }
+        },
+        "status": "processed",
+        "id": "integrated-00000044",
+        "original_id": "event-00000035",
+        "teaching_model": true
+      },
+      {
+        "time": 0.04804096000000001,
+        "order": 36,
+        "kind": "FRAME_SEND",
+        "source": "R1",
+        "target": "WEB",
+        "packet_id": "packet-000001",
+        "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+        "data": {
+          "link": "L4",
+          "packet_id": "packet-000001",
+          "source_mac": "02:00:00:04:00:01",
+          "destination_mac": "02:00:00:05:00:00",
+          "vlan": 1,
+          "tagged": false
+        },
+        "status": "processed",
+        "id": "integrated-00000045",
+        "original_id": "event-00000036",
+        "teaching_model": true
+      },
+      {
+        "time": 0.05304608000000001,
+        "order": 37,
+        "kind": "FRAME_RECEIVE",
+        "source": "R1",
+        "target": "WEB",
+        "packet_id": "packet-000001",
+        "explanation": "完整虚拟帧到达链路另一端。",
+        "data": {
+          "ingress": "WEB:eth0",
+          "link": "L4",
+          "frame": {
+            "packet_id": "packet-000001",
+            "source_mac": "02:00:00:04:00:01",
+            "destination_mac": "02:00:00:05:00:00",
+            "vlan": 1,
+            "tagged": false
+          }
+        },
+        "status": "processed",
+        "id": "integrated-00000046",
+        "original_id": "event-00000037",
+        "teaching_model": true
+      },
+      {
+        "time": 0.05304608000000001,
+        "order": 38,
+        "kind": "DELIVER",
+        "source": "WEB",
+        "target": "WEB",
+        "packet_id": "packet-000001",
+        "explanation": "目的 IP 匹配，交给上层协议。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000047",
+        "original_id": "event-00000038",
+        "teaching_model": true
+      },
+      {
+        "time": 0.05304608000000001,
+        "order": 39,
+        "kind": "APPLICATION_ECHO",
+        "source": "WEB",
+        "target": "PC1",
+        "packet_id": "packet-000001",
+        "explanation": "教学 UDP 回显服务收到消息后原样返回；消息字节采用十六进制文本编码。",
+        "data": {
+          "payload_hex": "4869",
+          "payload_encoding": "hex"
+        },
+        "status": "processed",
+        "id": "integrated-00000048",
+        "original_id": "event-00000039",
+        "teaching_model": true
+      },
+      {
+        "time": 0.05304608000000001,
+        "order": 40,
+        "kind": "IP_SEND",
+        "source": "WEB",
+        "target": "203.0.113.1",
+        "packet_id": "packet-000006",
+        "explanation": "应用数据交给虚拟 IP 协议栈。",
+        "data": {
+          "node": "WEB"
+        },
+        "status": "processed",
+        "id": "integrated-00000049",
+        "original_id": "event-00000040",
+        "teaching_model": true
+      },
+      {
+        "time": 0.05304608000000001,
+        "order": 41,
+        "kind": "ROUTE",
+        "source": "WEB",
+        "target": "203.0.113.1",
+        "packet_id": "packet-000006",
+        "explanation": "最长前缀匹配选择 eth0，下一跳 203.0.113.1。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000050",
+        "original_id": "event-00000041",
+        "teaching_model": true
+      },
+      {
+        "time": 0.05304608000000001,
+        "order": 42,
+        "kind": "FRAME_SEND",
+        "source": "WEB",
+        "target": "R1",
+        "packet_id": "packet-000006",
+        "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+        "data": {
+          "link": "L4",
+          "packet_id": "packet-000006",
+          "source_mac": "02:00:00:05:00:00",
+          "destination_mac": "02:00:00:04:00:01",
+          "vlan": 1,
+          "tagged": false
+        },
+        "status": "processed",
+        "id": "integrated-00000051",
+        "original_id": "event-00000042",
+        "teaching_model": true
+      },
+      {
+        "time": 0.05805120000000001,
+        "order": 43,
+        "kind": "FRAME_RECEIVE",
+        "source": "WEB",
+        "target": "R1",
+        "packet_id": "packet-000006",
+        "explanation": "完整虚拟帧到达链路另一端。",
+        "data": {
+          "ingress": "R1:wan",
+          "link": "L4",
+          "frame": {
+            "packet_id": "packet-000006",
+            "source_mac": "02:00:00:05:00:00",
+            "destination_mac": "02:00:00:04:00:01",
+            "vlan": 1,
+            "tagged": false
+          }
+        },
+        "status": "processed",
+        "id": "integrated-00000052",
+        "original_id": "event-00000043",
+        "teaching_model": true
+      },
+      {
+        "time": 0.05805120000000001,
+        "order": 44,
+        "kind": "NAT_IN",
+        "source": "R1",
+        "target": "192.168.1.10",
+        "packet_id": "packet-000006",
+        "explanation": "NAT 映射反向转换目的地址和端口。",
+        "data": {
+          "protocol": "UDP",
+          "private_ip": "192.168.1.10",
+          "private_port": 50000,
+          "public_ip": "203.0.113.1",
+          "public_port": 40000,
+          "expires": 120.03803072
+        },
+        "status": "processed",
+        "id": "integrated-00000053",
+        "original_id": "event-00000044",
+        "teaching_model": true
+      },
+      {
+        "time": 0.05805120000000001,
+        "order": 45,
+        "kind": "ROUTE",
+        "source": "R1",
+        "target": "192.168.1.10",
+        "packet_id": "packet-000006",
+        "explanation": "最长前缀匹配选择 lan，下一跳 192.168.1.10。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000054",
+        "original_id": "event-00000045",
+        "teaching_model": true
+      },
+      {
+        "time": 0.05805120000000001,
+        "order": 46,
+        "kind": "FRAME_SEND",
+        "source": "R1",
+        "target": "SW1",
+        "packet_id": "packet-000006",
+        "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+        "data": {
+          "link": "L3",
+          "packet_id": "packet-000006",
+          "source_mac": "02:00:00:04:00:00",
+          "destination_mac": "02:00:00:01:00:00",
+          "vlan": 1,
+          "tagged": false
+        },
+        "status": "processed",
+        "id": "integrated-00000055",
+        "original_id": "event-00000046",
+        "teaching_model": true
+      },
+      {
+        "time": 0.06305632000000001,
+        "order": 47,
+        "kind": "FRAME_RECEIVE",
+        "source": "R1",
+        "target": "SW1",
+        "packet_id": "packet-000006",
+        "explanation": "完整虚拟帧到达链路另一端。",
+        "data": {
+          "ingress": "SW1:p3",
+          "link": "L3",
+          "frame": {
+            "packet_id": "packet-000006",
+            "source_mac": "02:00:00:04:00:00",
+            "destination_mac": "02:00:00:01:00:00",
+            "vlan": 1,
+            "tagged": false
+          }
+        },
+        "status": "processed",
+        "id": "integrated-00000056",
+        "original_id": "event-00000047",
+        "teaching_model": true
+      },
+      {
+        "time": 0.06305632000000001,
+        "order": 48,
+        "kind": "MAC_LEARN",
+        "source": "SW1",
+        "target": "",
+        "packet_id": "packet-000006",
+        "explanation": "从源 MAC 学习 VLAN 1：02:00:00:04:00:00 → p3。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000057",
+        "original_id": "event-00000048",
+        "teaching_model": true
+      },
+      {
+        "time": 0.06305632000000001,
+        "order": 49,
+        "kind": "SWITCH_FORWARD",
+        "source": "SW1",
+        "target": "p1",
+        "packet_id": "packet-000006",
+        "explanation": "查表单播转发。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000058",
+        "original_id": "event-00000049",
+        "teaching_model": true
+      },
+      {
+        "time": 0.06305632000000001,
+        "order": 50,
+        "kind": "FRAME_SEND",
+        "source": "SW1",
+        "target": "PC1",
+        "packet_id": "packet-000006",
+        "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+        "data": {
+          "link": "L1",
+          "packet_id": "packet-000006",
+          "source_mac": "02:00:00:04:00:00",
+          "destination_mac": "02:00:00:01:00:00",
+          "vlan": 1,
+          "tagged": false
+        },
+        "status": "processed",
+        "id": "integrated-00000059",
+        "original_id": "event-00000050",
+        "teaching_model": true
+      },
+      {
+        "id": "integrated-00000060",
+        "time": 0.06806144000000001,
+        "kind": "cpu.fetch",
+        "source": "cpu",
+        "target": "cpu",
+        "packet_id": null,
+        "status": "completed",
+        "explanation": "PC=5 取指：HALT",
+        "data": {
+          "pc": 5
+        },
+        "teaching_model": true,
+        "original_id": "cpu-12"
+      },
+      {
+        "time": 0.06806144000000001,
+        "order": 51,
+        "kind": "FRAME_RECEIVE",
+        "source": "SW1",
+        "target": "PC1",
+        "packet_id": "packet-000006",
+        "explanation": "完整虚拟帧到达链路另一端。",
+        "data": {
+          "ingress": "PC1:eth0",
+          "link": "L1",
+          "frame": {
+            "packet_id": "packet-000006",
+            "source_mac": "02:00:00:04:00:00",
+            "destination_mac": "02:00:00:01:00:00",
+            "vlan": 1,
+            "tagged": false
+          }
+        },
+        "status": "processed",
+        "id": "integrated-00000061",
+        "original_id": "event-00000051",
+        "teaching_model": true
+      },
+      {
+        "time": 0.06806144000000001,
+        "order": 52,
+        "kind": "DELIVER",
+        "source": "PC1",
+        "target": "PC1",
+        "packet_id": "packet-000006",
+        "explanation": "目的 IP 匹配，交给上层协议。",
+        "data": {},
+        "status": "processed",
+        "id": "integrated-00000062",
+        "original_id": "event-00000052",
+        "teaching_model": true
+      },
+      {
+        "id": "integrated-00000063",
+        "time": 0.06806144000000001,
+        "kind": "network.receive",
+        "source": "PC1:virtual-network",
+        "target": "PC1:nic",
+        "packet_id": "packet-000006",
+        "status": "completed",
+        "explanation": "数据块到达网卡",
+        "data": {
+          "bytes": 2
+        },
+        "teaching_model": true,
+        "original_id": "pipeline-1"
+      },
+      {
+        "id": "integrated-00000064",
+        "time": 0.06806144000000001,
+        "kind": "nic.dma",
+        "source": "PC1:nic",
+        "target": "PC1:memory",
+        "packet_id": "packet-000006",
+        "status": "completed",
+        "explanation": "DMA 将数据写入接收缓冲区",
+        "data": {},
+        "teaching_model": true,
+        "original_id": "pipeline-2"
+      },
+      {
+        "id": "integrated-00000065",
+        "time": 0.06806144000000001,
+        "kind": "nic.interrupt",
+        "source": "PC1:nic",
+        "target": "PC1:kernel",
+        "packet_id": "packet-000006",
+        "status": "completed",
+        "explanation": "内核开始处理接收数据",
+        "data": {
+          "cycles": 800
+        },
+        "teaching_model": true,
+        "original_id": "pipeline-3"
+      },
+      {
+        "id": "integrated-00000066",
+        "time": 0.06806294400000001,
+        "kind": "os.syscall",
+        "source": "PC1:kernel",
+        "target": "PC1:application",
+        "packet_id": "packet-000006",
+        "status": "completed",
+        "explanation": "协议栈处理完成，应用 recv 读取缓冲区",
+        "data": {
+          "bytes": 2
+        },
+        "teaching_model": true,
+        "original_id": "pipeline-4"
+      },
+      {
+        "id": "integrated-00000067",
+        "time": 0.06806294400000001,
+        "kind": "memory.receive",
+        "source": "PC1:kernel",
+        "target": "PC1:application",
+        "packet_id": "packet-000006",
+        "status": "completed",
+        "explanation": "回显字节写入教学内存地址 128",
+        "data": {
+          "address": 128,
+          "payload_hex": "4869"
+        },
+        "teaching_model": true,
+        "original_id": "received-memory-0"
+      },
+      {
+        "time": 1.008,
+        "order": 6,
+        "kind": "ARP_TIMEOUT",
+        "source": "PC1",
+        "target": "192.168.1.1",
+        "packet_id": "packet-000001",
+        "explanation": "邻居解析超时检查。",
+        "data": {
+          "key": "PC1|eth0|192.168.1.1"
+        },
+        "status": "processed",
+        "id": "integrated-00000068",
+        "original_id": "event-00000006",
+        "teaching_model": true
+      },
+      {
+        "time": 1.03803072,
+        "order": 32,
+        "kind": "ARP_TIMEOUT",
+        "source": "R1",
+        "target": "203.0.113.10",
+        "packet_id": "packet-000001",
+        "explanation": "邻居解析超时检查。",
+        "data": {
+          "key": "R1|wan|203.0.113.10"
+        },
+        "status": "processed",
+        "id": "integrated-00000069",
+        "original_id": "event-00000032",
+        "teaching_model": true
+      }
+    ],
+    "packets": [
+      {
+        "id": "packet-000001",
+        "protocol": "UDP",
+        "source_ip": "203.0.113.1",
+        "destination_ip": "203.0.113.10",
+        "payload": "4869",
+        "ttl": 63,
+        "size": 32,
+        "source_port": 40000,
+        "destination_port": 7,
+        "status": "delivered",
+        "current": "WEB",
+        "path": [
+          "PC1",
+          "R1",
+          "WEB"
+        ],
+        "encapsulation": [
+          {
+            "layer": "Ethernet",
+            "source": "02:00:00:04:00:01",
+            "destination": "02:00:00:05:00:00",
+            "vlan": 1,
+            "tagged": false
+          },
+          {
+            "layer": "IPv4",
+            "source": "203.0.113.1",
+            "destination": "203.0.113.10",
+            "ttl": 63
+          },
+          {
+            "layer": "UDP",
+            "payload": "4869",
+            "source_port": 40000,
+            "destination_port": 7
+          }
+        ],
+        "cpu_message_id": "message-1",
+        "payload_encoding": "hex",
+        "original_source": [
+          "192.168.1.10",
+          50000
+        ],
+        "nat_applied": true
+      },
+      {
+        "id": "packet-000002",
+        "protocol": "ARP",
+        "source_ip": "192.168.1.10",
+        "destination_ip": "192.168.1.1",
+        "payload": "",
+        "ttl": 64,
+        "size": 28,
+        "source_port": 50000,
+        "destination_port": 7,
+        "status": "processed",
+        "current": "R1",
+        "path": [],
+        "encapsulation": [
+          {
+            "layer": "Ethernet",
+            "source": "02:00:00:01:00:00",
+            "destination": "ff:ff:ff:ff:ff:ff",
+            "vlan": 1,
+            "tagged": false
+          },
+          {
+            "layer": "ARP",
+            "operation": "request",
+            "sender_ip": "192.168.1.10",
+            "target_ip": "192.168.1.1",
+            "sender_mac": "02:00:00:01:00:00"
+          }
+        ],
+        "operation": "request",
+        "sender_mac": "02:00:00:01:00:00",
+        "owner": "PC1"
+      },
+      {
+        "id": "packet-000003",
+        "protocol": "ARP",
+        "source_ip": "192.168.1.1",
+        "destination_ip": "192.168.1.10",
+        "payload": "",
+        "ttl": 64,
+        "size": 28,
+        "source_port": 50000,
+        "destination_port": 7,
+        "status": "processed",
+        "current": "PC1",
+        "path": [],
+        "encapsulation": [
+          {
+            "layer": "Ethernet",
+            "source": "02:00:00:04:00:00",
+            "destination": "02:00:00:01:00:00",
+            "vlan": 1,
+            "tagged": false
+          },
+          {
+            "layer": "ARP",
+            "operation": "reply",
+            "sender_ip": "192.168.1.1",
+            "target_ip": "192.168.1.10",
+            "sender_mac": "02:00:00:04:00:00"
+          }
+        ],
+        "operation": "reply",
+        "sender_mac": "02:00:00:04:00:00"
+      },
+      {
+        "id": "packet-000004",
+        "protocol": "ARP",
+        "source_ip": "203.0.113.1",
+        "destination_ip": "203.0.113.10",
+        "payload": "",
+        "ttl": 64,
+        "size": 28,
+        "source_port": 50000,
+        "destination_port": 7,
+        "status": "processed",
+        "current": "WEB",
+        "path": [],
+        "encapsulation": [
+          {
+            "layer": "Ethernet",
+            "source": "02:00:00:04:00:01",
+            "destination": "ff:ff:ff:ff:ff:ff",
+            "vlan": 1,
+            "tagged": false
+          },
+          {
+            "layer": "ARP",
+            "operation": "request",
+            "sender_ip": "203.0.113.1",
+            "target_ip": "203.0.113.10",
+            "sender_mac": "02:00:00:04:00:01"
+          }
+        ],
+        "operation": "request",
+        "sender_mac": "02:00:00:04:00:01",
+        "owner": "R1"
+      },
+      {
+        "id": "packet-000005",
+        "protocol": "ARP",
+        "source_ip": "203.0.113.10",
+        "destination_ip": "203.0.113.1",
+        "payload": "",
+        "ttl": 64,
+        "size": 28,
+        "source_port": 50000,
+        "destination_port": 7,
+        "status": "processed",
+        "current": "R1",
+        "path": [],
+        "encapsulation": [
+          {
+            "layer": "Ethernet",
+            "source": "02:00:00:05:00:00",
+            "destination": "02:00:00:04:00:01",
+            "vlan": 1,
+            "tagged": false
+          },
+          {
+            "layer": "ARP",
+            "operation": "reply",
+            "sender_ip": "203.0.113.10",
+            "target_ip": "203.0.113.1",
+            "sender_mac": "02:00:00:05:00:00"
+          }
+        ],
+        "operation": "reply",
+        "sender_mac": "02:00:00:05:00:00"
+      },
+      {
+        "id": "packet-000006",
+        "protocol": "UDP",
+        "source_ip": "203.0.113.10",
+        "destination_ip": "192.168.1.10",
+        "payload": "4869",
+        "ttl": 63,
+        "size": 32,
+        "source_port": 7,
+        "destination_port": 50000,
+        "status": "delivered",
+        "current": "PC1",
+        "path": [
+          "WEB",
+          "R1",
+          "PC1"
+        ],
+        "encapsulation": [
+          {
+            "layer": "Ethernet",
+            "source": "02:00:00:04:00:00",
+            "destination": "02:00:00:01:00:00",
+            "vlan": 1,
+            "tagged": false
+          },
+          {
+            "layer": "IPv4",
+            "source": "203.0.113.10",
+            "destination": "192.168.1.10",
+            "ttl": 63
+          },
+          {
+            "layer": "UDP",
+            "payload": "4869",
+            "source_port": 7,
+            "destination_port": 50000
+          }
+        ],
+        "reply_to": "packet-000001",
+        "cpu_message_id": "message-1",
+        "payload_encoding": "hex"
+      }
+    ],
+    "topology": {
+      "name": "示例：home",
+      "nodes": [
+        {
+          "id": "PC1",
+          "name": "PC1",
+          "type": "pc",
+          "x": 70,
+          "y": 90,
+          "interfaces": [
+            {
+              "name": "eth0",
+              "ip": "192.168.1.10/24",
+              "mac": "02:00:00:01:00:00",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            }
+          ],
+          "gateway": "192.168.1.1",
+          "routes": [],
+          "up": true,
+          "dhcp": null,
+          "nat": null,
+          "asn": 65000,
+          "arp": {
+            "192.168.1.1": {
+              "mac": "02:00:00:04:00:00",
+              "expires": 60.02802048
+            }
+          },
+          "mac_table": {}
+        },
+        {
+          "id": "PC2",
+          "name": "PC2",
+          "type": "laptop",
+          "x": 70,
+          "y": 270,
+          "interfaces": [
+            {
+              "name": "eth0",
+              "ip": "192.168.1.20/24",
+              "mac": "02:00:00:02:00:00",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            }
+          ],
+          "gateway": "192.168.1.1",
+          "routes": [],
+          "up": true,
+          "dhcp": null,
+          "nat": null,
+          "asn": 65000,
+          "arp": {
+            "192.168.1.10": {
+              "mac": "02:00:00:01:00:00",
+              "expires": 60.01801024
+            }
+          },
+          "mac_table": {}
+        },
+        {
+          "id": "SW1",
+          "name": "SW1",
+          "type": "switch",
+          "x": 310,
+          "y": 180,
+          "interfaces": [
+            {
+              "name": "p1",
+              "ip": "",
+              "mac": "02:00:00:03:00:00",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            },
+            {
+              "name": "p2",
+              "ip": "",
+              "mac": "02:00:00:03:00:01",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            },
+            {
+              "name": "p3",
+              "ip": "",
+              "mac": "02:00:00:03:00:02",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            }
+          ],
+          "gateway": "",
+          "routes": [],
+          "up": true,
+          "dhcp": null,
+          "nat": null,
+          "asn": 65000,
+          "arp": {},
+          "mac_table": {
+            "1|02:00:00:01:00:00": {
+              "port": "p1",
+              "expires": 300.0330256
+            },
+            "1|02:00:00:04:00:00": {
+              "port": "p3",
+              "expires": 300.06305632
+            }
+          }
+        },
+        {
+          "id": "R1",
+          "name": "R1",
+          "type": "router",
+          "x": 530,
+          "y": 180,
+          "interfaces": [
+            {
+              "name": "lan",
+              "ip": "192.168.1.1/24",
+              "mac": "02:00:00:04:00:00",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            },
+            {
+              "name": "wan",
+              "ip": "203.0.113.1/24",
+              "mac": "02:00:00:04:00:01",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            }
+          ],
+          "gateway": "",
+          "routes": [],
+          "up": true,
+          "dhcp": {
+            "network": "192.168.1.0/24",
+            "gateway": "192.168.1.1",
+            "start": 100,
+            "end": 199
+          },
+          "nat": {
+            "public_ip": "203.0.113.1",
+            "outside": "wan"
+          },
+          "asn": 65000,
+          "arp": {
+            "192.168.1.10": {
+              "mac": "02:00:00:01:00:00",
+              "expires": 60.01801024
+            },
+            "203.0.113.10": {
+              "mac": "02:00:00:05:00:00",
+              "expires": 60.04804096
+            }
+          },
+          "mac_table": {}
+        },
+        {
+          "id": "WEB",
+          "name": "WEB",
+          "type": "server",
+          "x": 760,
+          "y": 180,
+          "interfaces": [
+            {
+              "name": "eth0",
+              "ip": "203.0.113.10/24",
+              "mac": "02:00:00:05:00:00",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            }
+          ],
+          "gateway": "203.0.113.1",
+          "routes": [],
+          "up": true,
+          "dhcp": null,
+          "nat": null,
+          "asn": 65000,
+          "arp": {
+            "203.0.113.1": {
+              "mac": "02:00:00:04:00:01",
+              "expires": 60.04303584
+            }
+          },
+          "mac_table": {}
+        }
+      ],
+      "links": [
+        {
+          "a": "PC1:eth0",
+          "b": "SW1:p1",
+          "id": "L1",
+          "delay_ms": 5,
+          "jitter_ms": 0,
+          "bandwidth_mbps": 100,
+          "loss": 0,
+          "cost": 1,
+          "up": true
+        },
+        {
+          "a": "PC2:eth0",
+          "b": "SW1:p2",
+          "id": "L2",
+          "delay_ms": 5,
+          "jitter_ms": 0,
+          "bandwidth_mbps": 100,
+          "loss": 0,
+          "cost": 1,
+          "up": true
+        },
+        {
+          "a": "SW1:p3",
+          "b": "R1:lan",
+          "id": "L3",
+          "delay_ms": 5,
+          "jitter_ms": 0,
+          "bandwidth_mbps": 100,
+          "loss": 0,
+          "cost": 1,
+          "up": true
+        },
+        {
+          "a": "R1:wan",
+          "b": "WEB:eth0",
+          "id": "L4",
+          "delay_ms": 5,
+          "jitter_ms": 0,
+          "bandwidth_mbps": 100,
+          "loss": 0,
+          "cost": 1,
+          "up": true
+        }
+      ],
+      "mode": "teaching_simulation"
+    },
+    "network": {
+      "mode": "teaching_simulation",
+      "events": [
+        {
+          "time": 0.008,
+          "order": 1,
+          "kind": "IP_SEND",
+          "source": "PC1",
+          "target": "203.0.113.10",
+          "packet_id": "packet-000001",
+          "explanation": "应用数据交给虚拟 IP 协议栈。",
+          "data": {
+            "node": "PC1"
+          },
+          "status": "processed",
+          "id": "integrated-00000012",
+          "original_id": "event-00000001",
+          "teaching_model": true
+        },
+        {
+          "time": 0.008,
+          "order": 2,
+          "kind": "ROUTE",
+          "source": "PC1",
+          "target": "192.168.1.1",
+          "packet_id": "packet-000001",
+          "explanation": "最长前缀匹配选择 eth0，下一跳 192.168.1.1。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000013",
+          "original_id": "event-00000002",
+          "teaching_model": true
+        },
+        {
+          "time": 0.008,
+          "order": 3,
+          "kind": "ARP_REQUEST",
+          "source": "PC1",
+          "target": "192.168.1.1",
+          "packet_id": "packet-000002",
+          "explanation": "广播查询下一跳 MAC。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000014",
+          "original_id": "event-00000003",
+          "teaching_model": true
+        },
+        {
+          "time": 0.008,
+          "order": 4,
+          "kind": "FRAME_SEND",
+          "source": "PC1",
+          "target": "SW1",
+          "packet_id": "packet-000002",
+          "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+          "data": {
+            "link": "L1",
+            "packet_id": "packet-000002",
+            "source_mac": "02:00:00:01:00:00",
+            "destination_mac": "ff:ff:ff:ff:ff:ff",
+            "vlan": 1,
+            "tagged": false
+          },
+          "status": "processed",
+          "id": "integrated-00000015",
+          "original_id": "event-00000004",
+          "teaching_model": true
+        },
+        {
+          "time": 0.01300512,
+          "order": 5,
+          "kind": "FRAME_RECEIVE",
+          "source": "PC1",
+          "target": "SW1",
+          "packet_id": "packet-000002",
+          "explanation": "完整虚拟帧到达链路另一端。",
+          "data": {
+            "ingress": "SW1:p1",
+            "link": "L1",
+            "frame": {
+              "packet_id": "packet-000002",
+              "source_mac": "02:00:00:01:00:00",
+              "destination_mac": "ff:ff:ff:ff:ff:ff",
+              "vlan": 1,
+              "tagged": false
+            }
+          },
+          "status": "processed",
+          "id": "integrated-00000016",
+          "original_id": "event-00000005",
+          "teaching_model": true
+        },
+        {
+          "time": 0.01300512,
+          "order": 7,
+          "kind": "MAC_LEARN",
+          "source": "SW1",
+          "target": "",
+          "packet_id": "packet-000002",
+          "explanation": "从源 MAC 学习 VLAN 1：02:00:00:01:00:00 → p1。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000017",
+          "original_id": "event-00000007",
+          "teaching_model": true
+        },
+        {
+          "time": 0.01300512,
+          "order": 8,
+          "kind": "SWITCH_FLOOD",
+          "source": "SW1",
+          "target": "p2",
+          "packet_id": "packet-000002",
+          "explanation": "目的 MAC 未知或广播，在 VLAN 1 内泛洪。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000018",
+          "original_id": "event-00000008",
+          "teaching_model": true
+        },
+        {
+          "time": 0.01300512,
+          "order": 9,
+          "kind": "FRAME_SEND",
+          "source": "SW1",
+          "target": "PC2",
+          "packet_id": "packet-000002",
+          "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+          "data": {
+            "link": "L2",
+            "packet_id": "packet-000002",
+            "source_mac": "02:00:00:01:00:00",
+            "destination_mac": "ff:ff:ff:ff:ff:ff",
+            "vlan": 1,
+            "tagged": false
+          },
+          "status": "processed",
+          "id": "integrated-00000019",
+          "original_id": "event-00000009",
+          "teaching_model": true
+        },
+        {
+          "time": 0.01300512,
+          "order": 11,
+          "kind": "SWITCH_FLOOD",
+          "source": "SW1",
+          "target": "p3",
+          "packet_id": "packet-000002",
+          "explanation": "目的 MAC 未知或广播，在 VLAN 1 内泛洪。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000020",
+          "original_id": "event-00000011",
+          "teaching_model": true
+        },
+        {
+          "time": 0.01300512,
+          "order": 12,
+          "kind": "FRAME_SEND",
+          "source": "SW1",
+          "target": "R1",
+          "packet_id": "packet-000002",
+          "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+          "data": {
+            "link": "L3",
+            "packet_id": "packet-000002",
+            "source_mac": "02:00:00:01:00:00",
+            "destination_mac": "ff:ff:ff:ff:ff:ff",
+            "vlan": 1,
+            "tagged": false
+          },
+          "status": "processed",
+          "id": "integrated-00000021",
+          "original_id": "event-00000012",
+          "teaching_model": true
+        },
+        {
+          "time": 0.01801024,
+          "order": 10,
+          "kind": "FRAME_RECEIVE",
+          "source": "SW1",
+          "target": "PC2",
+          "packet_id": "packet-000002",
+          "explanation": "完整虚拟帧到达链路另一端。",
+          "data": {
+            "ingress": "PC2:eth0",
+            "link": "L2",
+            "frame": {
+              "packet_id": "packet-000002",
+              "source_mac": "02:00:00:01:00:00",
+              "destination_mac": "ff:ff:ff:ff:ff:ff",
+              "vlan": 1,
+              "tagged": false
+            }
+          },
+          "status": "processed",
+          "id": "integrated-00000022",
+          "original_id": "event-00000010",
+          "teaching_model": true
+        },
+        {
+          "time": 0.01801024,
+          "order": 13,
+          "kind": "FRAME_RECEIVE",
+          "source": "SW1",
+          "target": "R1",
+          "packet_id": "packet-000002",
+          "explanation": "完整虚拟帧到达链路另一端。",
+          "data": {
+            "ingress": "R1:lan",
+            "link": "L3",
+            "frame": {
+              "packet_id": "packet-000002",
+              "source_mac": "02:00:00:01:00:00",
+              "destination_mac": "ff:ff:ff:ff:ff:ff",
+              "vlan": 1,
+              "tagged": false
+            }
+          },
+          "status": "processed",
+          "id": "integrated-00000023",
+          "original_id": "event-00000013",
+          "teaching_model": true
+        },
+        {
+          "time": 0.01801024,
+          "order": 14,
+          "kind": "ARP_REPLY",
+          "source": "R1",
+          "target": "PC1",
+          "packet_id": "packet-000003",
+          "explanation": "返回本接口 MAC 地址。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000024",
+          "original_id": "event-00000014",
+          "teaching_model": true
+        },
+        {
+          "time": 0.01801024,
+          "order": 15,
+          "kind": "FRAME_SEND",
+          "source": "R1",
+          "target": "SW1",
+          "packet_id": "packet-000003",
+          "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+          "data": {
+            "link": "L3",
+            "packet_id": "packet-000003",
+            "source_mac": "02:00:00:04:00:00",
+            "destination_mac": "02:00:00:01:00:00",
+            "vlan": 1,
+            "tagged": false
+          },
+          "status": "processed",
+          "id": "integrated-00000025",
+          "original_id": "event-00000015",
+          "teaching_model": true
+        },
+        {
+          "time": 0.02301536,
+          "order": 16,
+          "kind": "FRAME_RECEIVE",
+          "source": "R1",
+          "target": "SW1",
+          "packet_id": "packet-000003",
+          "explanation": "完整虚拟帧到达链路另一端。",
+          "data": {
+            "ingress": "SW1:p3",
+            "link": "L3",
+            "frame": {
+              "packet_id": "packet-000003",
+              "source_mac": "02:00:00:04:00:00",
+              "destination_mac": "02:00:00:01:00:00",
+              "vlan": 1,
+              "tagged": false
+            }
+          },
+          "status": "processed",
+          "id": "integrated-00000026",
+          "original_id": "event-00000016",
+          "teaching_model": true
+        },
+        {
+          "time": 0.02301536,
+          "order": 17,
+          "kind": "MAC_LEARN",
+          "source": "SW1",
+          "target": "",
+          "packet_id": "packet-000003",
+          "explanation": "从源 MAC 学习 VLAN 1：02:00:00:04:00:00 → p3。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000027",
+          "original_id": "event-00000017",
+          "teaching_model": true
+        },
+        {
+          "time": 0.02301536,
+          "order": 18,
+          "kind": "SWITCH_FORWARD",
+          "source": "SW1",
+          "target": "p1",
+          "packet_id": "packet-000003",
+          "explanation": "查表单播转发。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000028",
+          "original_id": "event-00000018",
+          "teaching_model": true
+        },
+        {
+          "time": 0.02301536,
+          "order": 19,
+          "kind": "FRAME_SEND",
+          "source": "SW1",
+          "target": "PC1",
+          "packet_id": "packet-000003",
+          "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+          "data": {
+            "link": "L1",
+            "packet_id": "packet-000003",
+            "source_mac": "02:00:00:04:00:00",
+            "destination_mac": "02:00:00:01:00:00",
+            "vlan": 1,
+            "tagged": false
+          },
+          "status": "processed",
+          "id": "integrated-00000029",
+          "original_id": "event-00000019",
+          "teaching_model": true
+        },
+        {
+          "time": 0.02802048,
+          "order": 20,
+          "kind": "FRAME_RECEIVE",
+          "source": "SW1",
+          "target": "PC1",
+          "packet_id": "packet-000003",
+          "explanation": "完整虚拟帧到达链路另一端。",
+          "data": {
+            "ingress": "PC1:eth0",
+            "link": "L1",
+            "frame": {
+              "packet_id": "packet-000003",
+              "source_mac": "02:00:00:04:00:00",
+              "destination_mac": "02:00:00:01:00:00",
+              "vlan": 1,
+              "tagged": false
+            }
+          },
+          "status": "processed",
+          "id": "integrated-00000030",
+          "original_id": "event-00000020",
+          "teaching_model": true
+        },
+        {
+          "time": 0.02802048,
+          "order": 21,
+          "kind": "FRAME_SEND",
+          "source": "PC1",
+          "target": "SW1",
+          "packet_id": "packet-000001",
+          "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+          "data": {
+            "link": "L1",
+            "packet_id": "packet-000001",
+            "source_mac": "02:00:00:01:00:00",
+            "destination_mac": "02:00:00:04:00:00",
+            "vlan": 1,
+            "tagged": false
+          },
+          "status": "processed",
+          "id": "integrated-00000031",
+          "original_id": "event-00000021",
+          "teaching_model": true
+        },
+        {
+          "time": 0.0330256,
+          "order": 22,
+          "kind": "FRAME_RECEIVE",
+          "source": "PC1",
+          "target": "SW1",
+          "packet_id": "packet-000001",
+          "explanation": "完整虚拟帧到达链路另一端。",
+          "data": {
+            "ingress": "SW1:p1",
+            "link": "L1",
+            "frame": {
+              "packet_id": "packet-000001",
+              "source_mac": "02:00:00:01:00:00",
+              "destination_mac": "02:00:00:04:00:00",
+              "vlan": 1,
+              "tagged": false
+            }
+          },
+          "status": "processed",
+          "id": "integrated-00000032",
+          "original_id": "event-00000022",
+          "teaching_model": true
+        },
+        {
+          "time": 0.0330256,
+          "order": 23,
+          "kind": "MAC_LEARN",
+          "source": "SW1",
+          "target": "",
+          "packet_id": "packet-000001",
+          "explanation": "从源 MAC 学习 VLAN 1：02:00:00:01:00:00 → p1。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000033",
+          "original_id": "event-00000023",
+          "teaching_model": true
+        },
+        {
+          "time": 0.0330256,
+          "order": 24,
+          "kind": "SWITCH_FORWARD",
+          "source": "SW1",
+          "target": "p3",
+          "packet_id": "packet-000001",
+          "explanation": "查表单播转发。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000034",
+          "original_id": "event-00000024",
+          "teaching_model": true
+        },
+        {
+          "time": 0.0330256,
+          "order": 25,
+          "kind": "FRAME_SEND",
+          "source": "SW1",
+          "target": "R1",
+          "packet_id": "packet-000001",
+          "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+          "data": {
+            "link": "L3",
+            "packet_id": "packet-000001",
+            "source_mac": "02:00:00:01:00:00",
+            "destination_mac": "02:00:00:04:00:00",
+            "vlan": 1,
+            "tagged": false
+          },
+          "status": "processed",
+          "id": "integrated-00000035",
+          "original_id": "event-00000025",
+          "teaching_model": true
+        },
+        {
+          "time": 0.038030720000000004,
+          "order": 26,
+          "kind": "FRAME_RECEIVE",
+          "source": "SW1",
+          "target": "R1",
+          "packet_id": "packet-000001",
+          "explanation": "完整虚拟帧到达链路另一端。",
+          "data": {
+            "ingress": "R1:lan",
+            "link": "L3",
+            "frame": {
+              "packet_id": "packet-000001",
+              "source_mac": "02:00:00:01:00:00",
+              "destination_mac": "02:00:00:04:00:00",
+              "vlan": 1,
+              "tagged": false
+            }
+          },
+          "status": "processed",
+          "id": "integrated-00000036",
+          "original_id": "event-00000026",
+          "teaching_model": true
+        },
+        {
+          "time": 0.038030720000000004,
+          "order": 27,
+          "kind": "ROUTE",
+          "source": "R1",
+          "target": "203.0.113.10",
+          "packet_id": "packet-000001",
+          "explanation": "最长前缀匹配选择 wan，下一跳 203.0.113.10。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000037",
+          "original_id": "event-00000027",
+          "teaching_model": true
+        },
+        {
+          "time": 0.038030720000000004,
+          "order": 28,
+          "kind": "NAT_OUT",
+          "source": "R1",
+          "target": "203.0.113.10",
+          "packet_id": "packet-000001",
+          "explanation": "PAT 改写源地址和源端口。",
+          "data": {
+            "protocol": "UDP",
+            "private_ip": "192.168.1.10",
+            "private_port": 50000,
+            "public_ip": "203.0.113.1",
+            "public_port": 40000,
+            "expires": 120.03803072
+          },
+          "status": "processed",
+          "id": "integrated-00000038",
+          "original_id": "event-00000028",
+          "teaching_model": true
+        },
+        {
+          "time": 0.038030720000000004,
+          "order": 29,
+          "kind": "ARP_REQUEST",
+          "source": "R1",
+          "target": "203.0.113.10",
+          "packet_id": "packet-000004",
+          "explanation": "广播查询下一跳 MAC。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000039",
+          "original_id": "event-00000029",
+          "teaching_model": true
+        },
+        {
+          "time": 0.038030720000000004,
+          "order": 30,
+          "kind": "FRAME_SEND",
+          "source": "R1",
+          "target": "WEB",
+          "packet_id": "packet-000004",
+          "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+          "data": {
+            "link": "L4",
+            "packet_id": "packet-000004",
+            "source_mac": "02:00:00:04:00:01",
+            "destination_mac": "ff:ff:ff:ff:ff:ff",
+            "vlan": 1,
+            "tagged": false
+          },
+          "status": "processed",
+          "id": "integrated-00000040",
+          "original_id": "event-00000030",
+          "teaching_model": true
+        },
+        {
+          "time": 0.043035840000000006,
+          "order": 31,
+          "kind": "FRAME_RECEIVE",
+          "source": "R1",
+          "target": "WEB",
+          "packet_id": "packet-000004",
+          "explanation": "完整虚拟帧到达链路另一端。",
+          "data": {
+            "ingress": "WEB:eth0",
+            "link": "L4",
+            "frame": {
+              "packet_id": "packet-000004",
+              "source_mac": "02:00:00:04:00:01",
+              "destination_mac": "ff:ff:ff:ff:ff:ff",
+              "vlan": 1,
+              "tagged": false
+            }
+          },
+          "status": "processed",
+          "id": "integrated-00000041",
+          "original_id": "event-00000031",
+          "teaching_model": true
+        },
+        {
+          "time": 0.043035840000000006,
+          "order": 33,
+          "kind": "ARP_REPLY",
+          "source": "WEB",
+          "target": "R1",
+          "packet_id": "packet-000005",
+          "explanation": "返回本接口 MAC 地址。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000042",
+          "original_id": "event-00000033",
+          "teaching_model": true
+        },
+        {
+          "time": 0.043035840000000006,
+          "order": 34,
+          "kind": "FRAME_SEND",
+          "source": "WEB",
+          "target": "R1",
+          "packet_id": "packet-000005",
+          "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+          "data": {
+            "link": "L4",
+            "packet_id": "packet-000005",
+            "source_mac": "02:00:00:05:00:00",
+            "destination_mac": "02:00:00:04:00:01",
+            "vlan": 1,
+            "tagged": false
+          },
+          "status": "processed",
+          "id": "integrated-00000043",
+          "original_id": "event-00000034",
+          "teaching_model": true
+        },
+        {
+          "time": 0.04804096000000001,
+          "order": 35,
+          "kind": "FRAME_RECEIVE",
+          "source": "WEB",
+          "target": "R1",
+          "packet_id": "packet-000005",
+          "explanation": "完整虚拟帧到达链路另一端。",
+          "data": {
+            "ingress": "R1:wan",
+            "link": "L4",
+            "frame": {
+              "packet_id": "packet-000005",
+              "source_mac": "02:00:00:05:00:00",
+              "destination_mac": "02:00:00:04:00:01",
+              "vlan": 1,
+              "tagged": false
+            }
+          },
+          "status": "processed",
+          "id": "integrated-00000044",
+          "original_id": "event-00000035",
+          "teaching_model": true
+        },
+        {
+          "time": 0.04804096000000001,
+          "order": 36,
+          "kind": "FRAME_SEND",
+          "source": "R1",
+          "target": "WEB",
+          "packet_id": "packet-000001",
+          "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+          "data": {
+            "link": "L4",
+            "packet_id": "packet-000001",
+            "source_mac": "02:00:00:04:00:01",
+            "destination_mac": "02:00:00:05:00:00",
+            "vlan": 1,
+            "tagged": false
+          },
+          "status": "processed",
+          "id": "integrated-00000045",
+          "original_id": "event-00000036",
+          "teaching_model": true
+        },
+        {
+          "time": 0.05304608000000001,
+          "order": 37,
+          "kind": "FRAME_RECEIVE",
+          "source": "R1",
+          "target": "WEB",
+          "packet_id": "packet-000001",
+          "explanation": "完整虚拟帧到达链路另一端。",
+          "data": {
+            "ingress": "WEB:eth0",
+            "link": "L4",
+            "frame": {
+              "packet_id": "packet-000001",
+              "source_mac": "02:00:00:04:00:01",
+              "destination_mac": "02:00:00:05:00:00",
+              "vlan": 1,
+              "tagged": false
+            }
+          },
+          "status": "processed",
+          "id": "integrated-00000046",
+          "original_id": "event-00000037",
+          "teaching_model": true
+        },
+        {
+          "time": 0.05304608000000001,
+          "order": 38,
+          "kind": "DELIVER",
+          "source": "WEB",
+          "target": "WEB",
+          "packet_id": "packet-000001",
+          "explanation": "目的 IP 匹配，交给上层协议。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000047",
+          "original_id": "event-00000038",
+          "teaching_model": true
+        },
+        {
+          "time": 0.05304608000000001,
+          "order": 39,
+          "kind": "APPLICATION_ECHO",
+          "source": "WEB",
+          "target": "PC1",
+          "packet_id": "packet-000001",
+          "explanation": "教学 UDP 回显服务收到消息后原样返回；消息字节采用十六进制文本编码。",
+          "data": {
+            "payload_hex": "4869",
+            "payload_encoding": "hex"
+          },
+          "status": "processed",
+          "id": "integrated-00000048",
+          "original_id": "event-00000039",
+          "teaching_model": true
+        },
+        {
+          "time": 0.05304608000000001,
+          "order": 40,
+          "kind": "IP_SEND",
+          "source": "WEB",
+          "target": "203.0.113.1",
+          "packet_id": "packet-000006",
+          "explanation": "应用数据交给虚拟 IP 协议栈。",
+          "data": {
+            "node": "WEB"
+          },
+          "status": "processed",
+          "id": "integrated-00000049",
+          "original_id": "event-00000040",
+          "teaching_model": true
+        },
+        {
+          "time": 0.05304608000000001,
+          "order": 41,
+          "kind": "ROUTE",
+          "source": "WEB",
+          "target": "203.0.113.1",
+          "packet_id": "packet-000006",
+          "explanation": "最长前缀匹配选择 eth0，下一跳 203.0.113.1。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000050",
+          "original_id": "event-00000041",
+          "teaching_model": true
+        },
+        {
+          "time": 0.05304608000000001,
+          "order": 42,
+          "kind": "FRAME_SEND",
+          "source": "WEB",
+          "target": "R1",
+          "packet_id": "packet-000006",
+          "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+          "data": {
+            "link": "L4",
+            "packet_id": "packet-000006",
+            "source_mac": "02:00:00:05:00:00",
+            "destination_mac": "02:00:00:04:00:01",
+            "vlan": 1,
+            "tagged": false
+          },
+          "status": "processed",
+          "id": "integrated-00000051",
+          "original_id": "event-00000042",
+          "teaching_model": true
+        },
+        {
+          "time": 0.05805120000000001,
+          "order": 43,
+          "kind": "FRAME_RECEIVE",
+          "source": "WEB",
+          "target": "R1",
+          "packet_id": "packet-000006",
+          "explanation": "完整虚拟帧到达链路另一端。",
+          "data": {
+            "ingress": "R1:wan",
+            "link": "L4",
+            "frame": {
+              "packet_id": "packet-000006",
+              "source_mac": "02:00:00:05:00:00",
+              "destination_mac": "02:00:00:04:00:01",
+              "vlan": 1,
+              "tagged": false
+            }
+          },
+          "status": "processed",
+          "id": "integrated-00000052",
+          "original_id": "event-00000043",
+          "teaching_model": true
+        },
+        {
+          "time": 0.05805120000000001,
+          "order": 44,
+          "kind": "NAT_IN",
+          "source": "R1",
+          "target": "192.168.1.10",
+          "packet_id": "packet-000006",
+          "explanation": "NAT 映射反向转换目的地址和端口。",
+          "data": {
+            "protocol": "UDP",
+            "private_ip": "192.168.1.10",
+            "private_port": 50000,
+            "public_ip": "203.0.113.1",
+            "public_port": 40000,
+            "expires": 120.03803072
+          },
+          "status": "processed",
+          "id": "integrated-00000053",
+          "original_id": "event-00000044",
+          "teaching_model": true
+        },
+        {
+          "time": 0.05805120000000001,
+          "order": 45,
+          "kind": "ROUTE",
+          "source": "R1",
+          "target": "192.168.1.10",
+          "packet_id": "packet-000006",
+          "explanation": "最长前缀匹配选择 lan，下一跳 192.168.1.10。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000054",
+          "original_id": "event-00000045",
+          "teaching_model": true
+        },
+        {
+          "time": 0.05805120000000001,
+          "order": 46,
+          "kind": "FRAME_SEND",
+          "source": "R1",
+          "target": "SW1",
+          "packet_id": "packet-000006",
+          "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+          "data": {
+            "link": "L3",
+            "packet_id": "packet-000006",
+            "source_mac": "02:00:00:04:00:00",
+            "destination_mac": "02:00:00:01:00:00",
+            "vlan": 1,
+            "tagged": false
+          },
+          "status": "processed",
+          "id": "integrated-00000055",
+          "original_id": "event-00000046",
+          "teaching_model": true
+        },
+        {
+          "time": 0.06305632000000001,
+          "order": 47,
+          "kind": "FRAME_RECEIVE",
+          "source": "R1",
+          "target": "SW1",
+          "packet_id": "packet-000006",
+          "explanation": "完整虚拟帧到达链路另一端。",
+          "data": {
+            "ingress": "SW1:p3",
+            "link": "L3",
+            "frame": {
+              "packet_id": "packet-000006",
+              "source_mac": "02:00:00:04:00:00",
+              "destination_mac": "02:00:00:01:00:00",
+              "vlan": 1,
+              "tagged": false
+            }
+          },
+          "status": "processed",
+          "id": "integrated-00000056",
+          "original_id": "event-00000047",
+          "teaching_model": true
+        },
+        {
+          "time": 0.06305632000000001,
+          "order": 48,
+          "kind": "MAC_LEARN",
+          "source": "SW1",
+          "target": "",
+          "packet_id": "packet-000006",
+          "explanation": "从源 MAC 学习 VLAN 1：02:00:00:04:00:00 → p3。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000057",
+          "original_id": "event-00000048",
+          "teaching_model": true
+        },
+        {
+          "time": 0.06305632000000001,
+          "order": 49,
+          "kind": "SWITCH_FORWARD",
+          "source": "SW1",
+          "target": "p1",
+          "packet_id": "packet-000006",
+          "explanation": "查表单播转发。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000058",
+          "original_id": "event-00000049",
+          "teaching_model": true
+        },
+        {
+          "time": 0.06305632000000001,
+          "order": 50,
+          "kind": "FRAME_SEND",
+          "source": "SW1",
+          "target": "PC1",
+          "packet_id": "packet-000006",
+          "explanation": "链路排队 0.000 ms；串行化 0.005 ms。",
+          "data": {
+            "link": "L1",
+            "packet_id": "packet-000006",
+            "source_mac": "02:00:00:04:00:00",
+            "destination_mac": "02:00:00:01:00:00",
+            "vlan": 1,
+            "tagged": false
+          },
+          "status": "processed",
+          "id": "integrated-00000059",
+          "original_id": "event-00000050",
+          "teaching_model": true
+        },
+        {
+          "time": 0.06806144000000001,
+          "order": 51,
+          "kind": "FRAME_RECEIVE",
+          "source": "SW1",
+          "target": "PC1",
+          "packet_id": "packet-000006",
+          "explanation": "完整虚拟帧到达链路另一端。",
+          "data": {
+            "ingress": "PC1:eth0",
+            "link": "L1",
+            "frame": {
+              "packet_id": "packet-000006",
+              "source_mac": "02:00:00:04:00:00",
+              "destination_mac": "02:00:00:01:00:00",
+              "vlan": 1,
+              "tagged": false
+            }
+          },
+          "status": "processed",
+          "id": "integrated-00000061",
+          "original_id": "event-00000051",
+          "teaching_model": true
+        },
+        {
+          "time": 0.06806144000000001,
+          "order": 52,
+          "kind": "DELIVER",
+          "source": "PC1",
+          "target": "PC1",
+          "packet_id": "packet-000006",
+          "explanation": "目的 IP 匹配，交给上层协议。",
+          "data": {},
+          "status": "processed",
+          "id": "integrated-00000062",
+          "original_id": "event-00000052",
+          "teaching_model": true
+        },
+        {
+          "time": 1.008,
+          "order": 6,
+          "kind": "ARP_TIMEOUT",
+          "source": "PC1",
+          "target": "192.168.1.1",
+          "packet_id": "packet-000001",
+          "explanation": "邻居解析超时检查。",
+          "data": {
+            "key": "PC1|eth0|192.168.1.1"
+          },
+          "status": "processed",
+          "id": "integrated-00000068",
+          "original_id": "event-00000006",
+          "teaching_model": true
+        },
+        {
+          "time": 1.03803072,
+          "order": 32,
+          "kind": "ARP_TIMEOUT",
+          "source": "R1",
+          "target": "203.0.113.10",
+          "packet_id": "packet-000001",
+          "explanation": "邻居解析超时检查。",
+          "data": {
+            "key": "R1|wan|203.0.113.10"
+          },
+          "status": "processed",
+          "id": "integrated-00000069",
+          "original_id": "event-00000032",
+          "teaching_model": true
+        }
+      ],
+      "packets": [
+        {
+          "id": "packet-000001",
+          "protocol": "UDP",
+          "source_ip": "203.0.113.1",
+          "destination_ip": "203.0.113.10",
+          "payload": "4869",
+          "ttl": 63,
+          "size": 32,
+          "source_port": 40000,
+          "destination_port": 7,
+          "status": "delivered",
+          "current": "WEB",
+          "path": [
+            "PC1",
+            "R1",
+            "WEB"
+          ],
+          "encapsulation": [
+            {
+              "layer": "Ethernet",
+              "source": "02:00:00:04:00:01",
+              "destination": "02:00:00:05:00:00",
+              "vlan": 1,
+              "tagged": false
+            },
+            {
+              "layer": "IPv4",
+              "source": "203.0.113.1",
+              "destination": "203.0.113.10",
+              "ttl": 63
+            },
+            {
+              "layer": "UDP",
+              "payload": "4869",
+              "source_port": 40000,
+              "destination_port": 7
+            }
+          ],
+          "cpu_message_id": "message-1",
+          "payload_encoding": "hex",
+          "original_source": [
+            "192.168.1.10",
+            50000
+          ],
+          "nat_applied": true
+        },
+        {
+          "id": "packet-000002",
+          "protocol": "ARP",
+          "source_ip": "192.168.1.10",
+          "destination_ip": "192.168.1.1",
+          "payload": "",
+          "ttl": 64,
+          "size": 28,
+          "source_port": 50000,
+          "destination_port": 7,
+          "status": "processed",
+          "current": "R1",
+          "path": [],
+          "encapsulation": [
+            {
+              "layer": "Ethernet",
+              "source": "02:00:00:01:00:00",
+              "destination": "ff:ff:ff:ff:ff:ff",
+              "vlan": 1,
+              "tagged": false
+            },
+            {
+              "layer": "ARP",
+              "operation": "request",
+              "sender_ip": "192.168.1.10",
+              "target_ip": "192.168.1.1",
+              "sender_mac": "02:00:00:01:00:00"
+            }
+          ],
+          "operation": "request",
+          "sender_mac": "02:00:00:01:00:00",
+          "owner": "PC1"
+        },
+        {
+          "id": "packet-000003",
+          "protocol": "ARP",
+          "source_ip": "192.168.1.1",
+          "destination_ip": "192.168.1.10",
+          "payload": "",
+          "ttl": 64,
+          "size": 28,
+          "source_port": 50000,
+          "destination_port": 7,
+          "status": "processed",
+          "current": "PC1",
+          "path": [],
+          "encapsulation": [
+            {
+              "layer": "Ethernet",
+              "source": "02:00:00:04:00:00",
+              "destination": "02:00:00:01:00:00",
+              "vlan": 1,
+              "tagged": false
+            },
+            {
+              "layer": "ARP",
+              "operation": "reply",
+              "sender_ip": "192.168.1.1",
+              "target_ip": "192.168.1.10",
+              "sender_mac": "02:00:00:04:00:00"
+            }
+          ],
+          "operation": "reply",
+          "sender_mac": "02:00:00:04:00:00"
+        },
+        {
+          "id": "packet-000004",
+          "protocol": "ARP",
+          "source_ip": "203.0.113.1",
+          "destination_ip": "203.0.113.10",
+          "payload": "",
+          "ttl": 64,
+          "size": 28,
+          "source_port": 50000,
+          "destination_port": 7,
+          "status": "processed",
+          "current": "WEB",
+          "path": [],
+          "encapsulation": [
+            {
+              "layer": "Ethernet",
+              "source": "02:00:00:04:00:01",
+              "destination": "ff:ff:ff:ff:ff:ff",
+              "vlan": 1,
+              "tagged": false
+            },
+            {
+              "layer": "ARP",
+              "operation": "request",
+              "sender_ip": "203.0.113.1",
+              "target_ip": "203.0.113.10",
+              "sender_mac": "02:00:00:04:00:01"
+            }
+          ],
+          "operation": "request",
+          "sender_mac": "02:00:00:04:00:01",
+          "owner": "R1"
+        },
+        {
+          "id": "packet-000005",
+          "protocol": "ARP",
+          "source_ip": "203.0.113.10",
+          "destination_ip": "203.0.113.1",
+          "payload": "",
+          "ttl": 64,
+          "size": 28,
+          "source_port": 50000,
+          "destination_port": 7,
+          "status": "processed",
+          "current": "R1",
+          "path": [],
+          "encapsulation": [
+            {
+              "layer": "Ethernet",
+              "source": "02:00:00:05:00:00",
+              "destination": "02:00:00:04:00:01",
+              "vlan": 1,
+              "tagged": false
+            },
+            {
+              "layer": "ARP",
+              "operation": "reply",
+              "sender_ip": "203.0.113.10",
+              "target_ip": "203.0.113.1",
+              "sender_mac": "02:00:00:05:00:00"
+            }
+          ],
+          "operation": "reply",
+          "sender_mac": "02:00:00:05:00:00"
+        },
+        {
+          "id": "packet-000006",
+          "protocol": "UDP",
+          "source_ip": "203.0.113.10",
+          "destination_ip": "192.168.1.10",
+          "payload": "4869",
+          "ttl": 63,
+          "size": 32,
+          "source_port": 7,
+          "destination_port": 50000,
+          "status": "delivered",
+          "current": "PC1",
+          "path": [
+            "WEB",
+            "R1",
+            "PC1"
+          ],
+          "encapsulation": [
+            {
+              "layer": "Ethernet",
+              "source": "02:00:00:04:00:00",
+              "destination": "02:00:00:01:00:00",
+              "vlan": 1,
+              "tagged": false
+            },
+            {
+              "layer": "IPv4",
+              "source": "203.0.113.10",
+              "destination": "192.168.1.10",
+              "ttl": 63
+            },
+            {
+              "layer": "UDP",
+              "payload": "4869",
+              "source_port": 7,
+              "destination_port": 50000
+            }
+          ],
+          "reply_to": "packet-000001",
+          "cpu_message_id": "message-1",
+          "payload_encoding": "hex"
+        }
+      ],
+      "devices": [
+        {
+          "id": "PC1",
+          "name": "PC1",
+          "type": "pc",
+          "x": 70,
+          "y": 90,
+          "interfaces": [
+            {
+              "name": "eth0",
+              "ip": "192.168.1.10/24",
+              "mac": "02:00:00:01:00:00",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            }
+          ],
+          "gateway": "192.168.1.1",
+          "routes": [],
+          "up": true,
+          "dhcp": null,
+          "nat": null,
+          "asn": 65000,
+          "arp": {
+            "192.168.1.1": {
+              "mac": "02:00:00:04:00:00",
+              "expires": 60.02802048
+            }
+          },
+          "mac_table": {}
+        },
+        {
+          "id": "PC2",
+          "name": "PC2",
+          "type": "laptop",
+          "x": 70,
+          "y": 270,
+          "interfaces": [
+            {
+              "name": "eth0",
+              "ip": "192.168.1.20/24",
+              "mac": "02:00:00:02:00:00",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            }
+          ],
+          "gateway": "192.168.1.1",
+          "routes": [],
+          "up": true,
+          "dhcp": null,
+          "nat": null,
+          "asn": 65000,
+          "arp": {
+            "192.168.1.10": {
+              "mac": "02:00:00:01:00:00",
+              "expires": 60.01801024
+            }
+          },
+          "mac_table": {}
+        },
+        {
+          "id": "SW1",
+          "name": "SW1",
+          "type": "switch",
+          "x": 310,
+          "y": 180,
+          "interfaces": [
+            {
+              "name": "p1",
+              "ip": "",
+              "mac": "02:00:00:03:00:00",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            },
+            {
+              "name": "p2",
+              "ip": "",
+              "mac": "02:00:00:03:00:01",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            },
+            {
+              "name": "p3",
+              "ip": "",
+              "mac": "02:00:00:03:00:02",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            }
+          ],
+          "gateway": "",
+          "routes": [],
+          "up": true,
+          "dhcp": null,
+          "nat": null,
+          "asn": 65000,
+          "arp": {},
+          "mac_table": {
+            "1|02:00:00:01:00:00": {
+              "port": "p1",
+              "expires": 300.0330256
+            },
+            "1|02:00:00:04:00:00": {
+              "port": "p3",
+              "expires": 300.06305632
+            }
+          }
+        },
+        {
+          "id": "R1",
+          "name": "R1",
+          "type": "router",
+          "x": 530,
+          "y": 180,
+          "interfaces": [
+            {
+              "name": "lan",
+              "ip": "192.168.1.1/24",
+              "mac": "02:00:00:04:00:00",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            },
+            {
+              "name": "wan",
+              "ip": "203.0.113.1/24",
+              "mac": "02:00:00:04:00:01",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            }
+          ],
+          "gateway": "",
+          "routes": [],
+          "up": true,
+          "dhcp": {
+            "network": "192.168.1.0/24",
+            "gateway": "192.168.1.1",
+            "start": 100,
+            "end": 199
+          },
+          "nat": {
+            "public_ip": "203.0.113.1",
+            "outside": "wan"
+          },
+          "asn": 65000,
+          "arp": {
+            "192.168.1.10": {
+              "mac": "02:00:00:01:00:00",
+              "expires": 60.01801024
+            },
+            "203.0.113.10": {
+              "mac": "02:00:00:05:00:00",
+              "expires": 60.04804096
+            }
+          },
+          "mac_table": {}
+        },
+        {
+          "id": "WEB",
+          "name": "WEB",
+          "type": "server",
+          "x": 760,
+          "y": 180,
+          "interfaces": [
+            {
+              "name": "eth0",
+              "ip": "203.0.113.10/24",
+              "mac": "02:00:00:05:00:00",
+              "vlan": 1,
+              "mode": "access",
+              "allowed_vlans": [
+                1
+              ],
+              "mtu": 1500,
+              "up": true
+            }
+          ],
+          "gateway": "203.0.113.1",
+          "routes": [],
+          "up": true,
+          "dhcp": null,
+          "nat": null,
+          "asn": 65000,
+          "arp": {
+            "203.0.113.1": {
+              "mac": "02:00:00:04:00:01",
+              "expires": 60.04303584
+            }
+          },
+          "mac_table": {}
+        }
+      ],
+      "topology": {
+        "name": "示例：home",
+        "nodes": [
+          {
+            "id": "PC1",
+            "name": "PC1",
+            "type": "pc",
+            "x": 70,
+            "y": 90,
+            "interfaces": [
+              {
+                "name": "eth0",
+                "ip": "192.168.1.10/24",
+                "mac": "02:00:00:01:00:00",
+                "vlan": 1,
+                "mode": "access",
+                "allowed_vlans": [
+                  1
+                ],
+                "mtu": 1500,
+                "up": true
+              }
+            ],
+            "gateway": "192.168.1.1",
+            "routes": [],
+            "up": true,
+            "dhcp": null,
+            "nat": null,
+            "asn": 65000,
+            "arp": {
+              "192.168.1.1": {
+                "mac": "02:00:00:04:00:00",
+                "expires": 60.02802048
+              }
+            },
+            "mac_table": {}
+          },
+          {
+            "id": "PC2",
+            "name": "PC2",
+            "type": "laptop",
+            "x": 70,
+            "y": 270,
+            "interfaces": [
+              {
+                "name": "eth0",
+                "ip": "192.168.1.20/24",
+                "mac": "02:00:00:02:00:00",
+                "vlan": 1,
+                "mode": "access",
+                "allowed_vlans": [
+                  1
+                ],
+                "mtu": 1500,
+                "up": true
+              }
+            ],
+            "gateway": "192.168.1.1",
+            "routes": [],
+            "up": true,
+            "dhcp": null,
+            "nat": null,
+            "asn": 65000,
+            "arp": {
+              "192.168.1.10": {
+                "mac": "02:00:00:01:00:00",
+                "expires": 60.01801024
+              }
+            },
+            "mac_table": {}
+          },
+          {
+            "id": "SW1",
+            "name": "SW1",
+            "type": "switch",
+            "x": 310,
+            "y": 180,
+            "interfaces": [
+              {
+                "name": "p1",
+                "ip": "",
+                "mac": "02:00:00:03:00:00",
+                "vlan": 1,
+                "mode": "access",
+                "allowed_vlans": [
+                  1
+                ],
+                "mtu": 1500,
+                "up": true
+              },
+              {
+                "name": "p2",
+                "ip": "",
+                "mac": "02:00:00:03:00:01",
+                "vlan": 1,
+                "mode": "access",
+                "allowed_vlans": [
+                  1
+                ],
+                "mtu": 1500,
+                "up": true
+              },
+              {
+                "name": "p3",
+                "ip": "",
+                "mac": "02:00:00:03:00:02",
+                "vlan": 1,
+                "mode": "access",
+                "allowed_vlans": [
+                  1
+                ],
+                "mtu": 1500,
+                "up": true
+              }
+            ],
+            "gateway": "",
+            "routes": [],
+            "up": true,
+            "dhcp": null,
+            "nat": null,
+            "asn": 65000,
+            "arp": {},
+            "mac_table": {
+              "1|02:00:00:01:00:00": {
+                "port": "p1",
+                "expires": 300.0330256
+              },
+              "1|02:00:00:04:00:00": {
+                "port": "p3",
+                "expires": 300.06305632
+              }
+            }
+          },
+          {
+            "id": "R1",
+            "name": "R1",
+            "type": "router",
+            "x": 530,
+            "y": 180,
+            "interfaces": [
+              {
+                "name": "lan",
+                "ip": "192.168.1.1/24",
+                "mac": "02:00:00:04:00:00",
+                "vlan": 1,
+                "mode": "access",
+                "allowed_vlans": [
+                  1
+                ],
+                "mtu": 1500,
+                "up": true
+              },
+              {
+                "name": "wan",
+                "ip": "203.0.113.1/24",
+                "mac": "02:00:00:04:00:01",
+                "vlan": 1,
+                "mode": "access",
+                "allowed_vlans": [
+                  1
+                ],
+                "mtu": 1500,
+                "up": true
+              }
+            ],
+            "gateway": "",
+            "routes": [],
+            "up": true,
+            "dhcp": {
+              "network": "192.168.1.0/24",
+              "gateway": "192.168.1.1",
+              "start": 100,
+              "end": 199
+            },
+            "nat": {
+              "public_ip": "203.0.113.1",
+              "outside": "wan"
+            },
+            "asn": 65000,
+            "arp": {
+              "192.168.1.10": {
+                "mac": "02:00:00:01:00:00",
+                "expires": 60.01801024
+              },
+              "203.0.113.10": {
+                "mac": "02:00:00:05:00:00",
+                "expires": 60.04804096
+              }
+            },
+            "mac_table": {}
+          },
+          {
+            "id": "WEB",
+            "name": "WEB",
+            "type": "server",
+            "x": 760,
+            "y": 180,
+            "interfaces": [
+              {
+                "name": "eth0",
+                "ip": "203.0.113.10/24",
+                "mac": "02:00:00:05:00:00",
+                "vlan": 1,
+                "mode": "access",
+                "allowed_vlans": [
+                  1
+                ],
+                "mtu": 1500,
+                "up": true
+              }
+            ],
+            "gateway": "203.0.113.1",
+            "routes": [],
+            "up": true,
+            "dhcp": null,
+            "nat": null,
+            "asn": 65000,
+            "arp": {
+              "203.0.113.1": {
+                "mac": "02:00:00:04:00:01",
+                "expires": 60.04303584
+              }
+            },
+            "mac_table": {}
+          }
+        ],
+        "links": [
+          {
+            "a": "PC1:eth0",
+            "b": "SW1:p1",
+            "id": "L1",
+            "delay_ms": 5,
+            "jitter_ms": 0,
+            "bandwidth_mbps": 100,
+            "loss": 0,
+            "cost": 1,
+            "up": true
+          },
+          {
+            "a": "PC2:eth0",
+            "b": "SW1:p2",
+            "id": "L2",
+            "delay_ms": 5,
+            "jitter_ms": 0,
+            "bandwidth_mbps": 100,
+            "loss": 0,
+            "cost": 1,
+            "up": true
+          },
+          {
+            "a": "SW1:p3",
+            "b": "R1:lan",
+            "id": "L3",
+            "delay_ms": 5,
+            "jitter_ms": 0,
+            "bandwidth_mbps": 100,
+            "loss": 0,
+            "cost": 1,
+            "up": true
+          },
+          {
+            "a": "R1:wan",
+            "b": "WEB:eth0",
+            "id": "L4",
+            "delay_ms": 5,
+            "jitter_ms": 0,
+            "bandwidth_mbps": 100,
+            "loss": 0,
+            "cost": 1,
+            "up": true
+          }
+        ],
+        "mode": "teaching_simulation"
+      },
+      "stats": {
+        "frames_sent": 13,
+        "delivered": 2,
+        "dropped": 0,
+        "bytes_sent": 832
+      },
+      "time": 1.03803072,
+      "pending_events": 0,
+      "stp_blocked_links": [],
+      "nat_tables": {
+        "R1": {
+          "public_ip": "203.0.113.1",
+          "next_port": 40001,
+          "timeout": 120,
+          "entries": [
+            {
+              "protocol": "UDP",
+              "private_ip": "192.168.1.10",
+              "private_port": 50000,
+              "public_ip": "203.0.113.1",
+              "public_port": 40000,
+              "expires": 120.03803072
+            }
+          ],
+          "forwards": []
+        }
+      },
+      "note": "DHCP 为状态化 DORA 服务模型；ND 使用链路泛洪表示多播；STP 为最小树教学模型；TCP 拓扑仅建立连接，重传实验在传输层模拟器。"
+    },
+    "cpu": {
+      "format": "netlab.cpu.snapshot.v1",
+      "bits": 16,
+      "memory_size": 256,
+      "assembly": "MOV R0, 72\nSTORE 10, R0\nMOV R0, 105\nSTORE 11, R0\nSEND 10, 2\nHALT",
+      "receive_policy": "external",
+      "receive_queue": [
+        {
+          "id": "packet-000006",
+          "payload_hex": "4869"
+        }
+      ],
+      "pc": 6,
+      "registers": {
+        "R0": 105,
+        "R1": 0,
+        "R2": 0,
+        "R3": 0,
+        "R4": 0,
+        "R5": 0,
+        "R6": 0,
+        "R7": 0
+      },
+      "flags": {
+        "Z": false,
+        "N": false,
+        "C": false,
+        "V": false
+      },
+      "memory": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        72,
+        105,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        72,
+        105,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "cycles": 16,
+      "halted": true,
+      "stack_pointer": 256,
+      "program": [
+        {
+          "op": "MOV",
+          "args": [
+            "R0",
+            "72"
+          ],
+          "line": 1,
+          "text": "MOV R0, 72"
+        },
+        {
+          "op": "STORE",
+          "args": [
+            "10",
+            "R0"
+          ],
+          "line": 2,
+          "text": "STORE 10, R0"
+        },
+        {
+          "op": "MOV",
+          "args": [
+            "R0",
+            "105"
+          ],
+          "line": 3,
+          "text": "MOV R0, 105"
+        },
+        {
+          "op": "STORE",
+          "args": [
+            "11",
+            "R0"
+          ],
+          "line": 4,
+          "text": "STORE 11, R0"
+        },
+        {
+          "op": "SEND",
+          "args": [
+            "10",
+            "2"
+          ],
+          "line": 5,
+          "text": "SEND 10, 2"
+        },
+        {
+          "op": "HALT",
+          "args": [],
+          "line": 6,
+          "text": "HALT"
+        }
+      ],
+      "events": [
+        {
+          "id": "cpu-1",
+          "time": 0.0,
+          "kind": "cpu.fetch",
+          "source": "cpu",
+          "target": "cpu",
+          "packet_id": null,
+          "status": "completed",
+          "explanation": "PC=0 取指：MOV R0, 72",
+          "data": {
+            "pc": 0
+          },
+          "teaching_model": true
+        },
+        {
+          "id": "cpu-2",
+          "time": 0.001,
+          "kind": "cpu.fetch",
+          "source": "cpu",
+          "target": "cpu",
+          "packet_id": null,
+          "status": "completed",
+          "explanation": "PC=1 取指：STORE 10, R0",
+          "data": {
+            "pc": 1
+          },
+          "teaching_model": true
+        },
+        {
+          "id": "cpu-3",
+          "time": 0.001,
+          "kind": "memory.write",
+          "source": "cpu",
+          "target": "memory",
+          "packet_id": null,
+          "status": "completed",
+          "explanation": "写入地址 10",
+          "data": {
+            "address": 10,
+            "value": 72
+          },
+          "teaching_model": true
+        },
+        {
+          "id": "cpu-4",
+          "time": 0.004,
+          "kind": "cpu.fetch",
+          "source": "cpu",
+          "target": "cpu",
+          "packet_id": null,
+          "status": "completed",
+          "explanation": "PC=2 取指：MOV R0, 105",
+          "data": {
+            "pc": 2
+          },
+          "teaching_model": true
+        },
+        {
+          "id": "cpu-5",
+          "time": 0.005,
+          "kind": "cpu.fetch",
+          "source": "cpu",
+          "target": "cpu",
+          "packet_id": null,
+          "status": "completed",
+          "explanation": "PC=3 取指：STORE 11, R0",
+          "data": {
+            "pc": 3
+          },
+          "teaching_model": true
+        },
+        {
+          "id": "cpu-6",
+          "time": 0.005,
+          "kind": "memory.write",
+          "source": "cpu",
+          "target": "memory",
+          "packet_id": null,
+          "status": "completed",
+          "explanation": "写入地址 11",
+          "data": {
+            "address": 11,
+            "value": 105
+          },
+          "teaching_model": true
+        },
+        {
+          "id": "cpu-7",
+          "time": 0.008,
+          "kind": "cpu.fetch",
+          "source": "cpu",
+          "target": "cpu",
+          "packet_id": null,
+          "status": "completed",
+          "explanation": "PC=4 取指：SEND 10, 2",
+          "data": {
+            "pc": 4
+          },
+          "teaching_model": true
+        },
+        {
+          "id": "cpu-8",
+          "time": 0.008,
+          "kind": "os.syscall",
+          "source": "cpu",
+          "target": "os",
+          "packet_id": "message-1",
+          "status": "completed",
+          "explanation": "SEND 进入内核态，地址=10，长度=2",
+          "data": {
+            "address": 10,
+            "length": 2
+          },
+          "teaching_model": true
+        },
+        {
+          "id": "cpu-9",
+          "time": 0.008,
+          "kind": "os.socket_buffer",
+          "source": "os",
+          "target": "socket-buffer",
+          "packet_id": "message-1",
+          "status": "completed",
+          "explanation": "教学内核将应用数据复制到 Socket 发送缓冲区",
+          "data": {
+            "payload_hex": "4869"
+          },
+          "teaching_model": true
+        },
+        {
+          "id": "cpu-10",
+          "time": 0.008,
+          "kind": "nic.dma",
+          "source": "memory",
+          "target": "nic",
+          "packet_id": "message-1",
+          "status": "completed",
+          "explanation": "教学网卡 DMA 读取发送缓冲区",
+          "data": {},
+          "teaching_model": true
+        },
+        {
+          "id": "cpu-11",
+          "time": 0.008,
+          "kind": "network.send",
+          "source": "nic",
+          "target": "virtual-network",
+          "packet_id": "message-1",
+          "status": "completed",
+          "explanation": "将虚拟消息交给模拟网络；未发送到真实网卡",
+          "data": {
+            "payload_hex": "4869"
+          },
+          "teaching_model": true
+        },
+        {
+          "id": "cpu-12",
+          "time": 0.015,
+          "kind": "cpu.fetch",
+          "source": "cpu",
+          "target": "cpu",
+          "packet_id": null,
+          "status": "completed",
+          "explanation": "PC=5 取指：HALT",
+          "data": {
+            "pc": 5
+          },
+          "teaching_model": true
+        }
+      ],
+      "sent_messages": [
+        {
+          "id": "message-1",
+          "payload_hex": "4869",
+          "length": 2
+        }
+      ],
+      "teaching_model": true
+    },
+    "messages": [
+      {
+        "message_id": "message-1",
+        "request_packet_id": "packet-000001",
+        "sent_hex": "4869",
+        "sent_bytes": 2,
+        "delivered": true,
+        "echo_received": true,
+        "receive_address": 128,
+        "reply_packet_id": "packet-000006",
+        "received_hex": "4869"
+      }
+    ],
+    "results": {
+      "success": true,
+      "network_success": true,
+      "messages_sent": 1,
+      "messages_received": 1,
+      "cpu_halted": true,
+      "blocked": false,
+      "executed_steps": 6,
+      "execution_limit_reached": false
+    },
+    "config": {
+      "assembly": "MOV R0, 72\nSTORE 10, R0\nMOV R0, 105\nSTORE 11, R0\nSEND 10, 2\nHALT",
+      "source": "PC1",
+      "target": "WEB",
+      "seed": 1,
+      "receive_address": 128,
+      "topology": {
+        "name": "示例：home",
+        "mode": "teaching_simulation",
+        "nodes": [
+          {
+            "id": "PC1",
+            "name": "PC1",
+            "type": "pc",
+            "x": 70,
+            "y": 90,
+            "interfaces": [
+              {
+                "name": "eth0",
+                "ip": "192.168.1.10/24"
+              }
+            ],
+            "gateway": "192.168.1.1"
+          },
+          {
+            "id": "PC2",
+            "name": "PC2",
+            "type": "laptop",
+            "x": 70,
+            "y": 270,
+            "interfaces": [
+              {
+                "name": "eth0",
+                "ip": "192.168.1.20/24"
+              }
+            ],
+            "gateway": "192.168.1.1"
+          },
+          {
+            "id": "SW1",
+            "name": "SW1",
+            "type": "switch",
+            "x": 310,
+            "y": 180,
+            "interfaces": [
+              {
+                "name": "p1",
+                "ip": ""
+              },
+              {
+                "name": "p2",
+                "ip": ""
+              },
+              {
+                "name": "p3",
+                "ip": ""
+              }
+            ]
+          },
+          {
+            "id": "R1",
+            "name": "R1",
+            "type": "router",
+            "x": 530,
+            "y": 180,
+            "interfaces": [
+              {
+                "name": "lan",
+                "ip": "192.168.1.1/24"
+              },
+              {
+                "name": "wan",
+                "ip": "203.0.113.1/24"
+              }
+            ],
+            "dhcp": {
+              "network": "192.168.1.0/24",
+              "gateway": "192.168.1.1",
+              "start": 100,
+              "end": 199
+            },
+            "nat": {
+              "public_ip": "203.0.113.1",
+              "outside": "wan"
+            }
+          },
+          {
+            "id": "WEB",
+            "name": "WEB",
+            "type": "server",
+            "x": 760,
+            "y": 180,
+            "interfaces": [
+              {
+                "name": "eth0",
+                "ip": "203.0.113.10/24"
+              }
+            ],
+            "gateway": "203.0.113.1"
+          }
+        ],
+        "links": [
+          {
+            "a": "PC1:eth0",
+            "b": "SW1:p1",
+            "id": "L1",
+            "delay_ms": 5,
+            "bandwidth_mbps": 100,
+            "loss": 0
+          },
+          {
+            "a": "PC2:eth0",
+            "b": "SW1:p2",
+            "id": "L2",
+            "delay_ms": 5,
+            "bandwidth_mbps": 100,
+            "loss": 0
+          },
+          {
+            "a": "SW1:p3",
+            "b": "R1:lan",
+            "id": "L3",
+            "delay_ms": 5,
+            "bandwidth_mbps": 100,
+            "loss": 0
+          },
+          {
+            "a": "R1:wan",
+            "b": "WEB:eth0",
+            "id": "L4",
+            "delay_ms": 5,
+            "bandwidth_mbps": 100,
+            "loss": 0
+          }
+        ]
+      }
+    },
+    "note": "共享数据包 ID 关联 CPU、系统调用、DMA、ARP、交换、路由、NAT 与回显接收。任意消息字节以十六进制文本封装，链路大小计入编码开销。CPU/网卡周期为教学参数，未模拟真实硬件；所有消息只在虚拟模型中流转。"
+  }
+}
