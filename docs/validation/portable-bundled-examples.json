@@ -1,0 +1,100 @@
+{
+  "scope": "loopback_only",
+  "kind": "measured",
+  "external_interpreter_used": false,
+  "exe": "C:\\code\\NetLabStudio\\qa\\portable-final-77x2x68j\\NetLabStudio\\NetLabStudio.exe",
+  "passed": 11,
+  "total": 11,
+  "results": [
+    {
+      "id": "tcp_echo",
+      "ok": true,
+      "returncode": 0,
+      "stdout": "你好 TCP\n",
+      "stderr": "",
+      "elapsed_ms": 188.701
+    },
+    {
+      "id": "udp_echo",
+      "ok": true,
+      "returncode": 0,
+      "stdout": "hello UDP\n",
+      "stderr": "",
+      "elapsed_ms": 184.782
+    },
+    {
+      "id": "asyncio",
+      "ok": true,
+      "returncode": 0,
+      "stdout": "asyncio echo\n",
+      "stderr": "",
+      "elapsed_ms": 223.663
+    },
+    {
+      "id": "select",
+      "ok": true,
+      "returncode": 0,
+      "stdout": "select event\n",
+      "stderr": "",
+      "elapsed_ms": 199.399
+    },
+    {
+      "id": "file_transfer",
+      "ok": true,
+      "returncode": 0,
+      "stdout": "SHA256: a8ebbbaaec0d7671874e704e45e28eaa56ced12494aedfcfa6f231a51d6aa3b8\nverified: True\n",
+      "stderr": "",
+      "elapsed_ms": 233.493
+    },
+    {
+      "id": "http",
+      "ok": true,
+      "returncode": 0,
+      "stdout": "status: 200\nlocal HTTP response\n",
+      "stderr": "",
+      "elapsed_ms": 825.753
+    },
+    {
+      "id": "multithread",
+      "ok": true,
+      "returncode": 0,
+      "stdout": "client 0\nclient 1\nclient 2\n",
+      "stderr": "",
+      "elapsed_ms": 227.577
+    },
+    {
+      "id": "buffers",
+      "ok": true,
+      "returncode": 0,
+      "stdout": "received bytes: 262144\nloopback MiB/s: 15.26\n",
+      "stderr": "",
+      "elapsed_ms": 203.102
+    },
+    {
+      "id": "timeout",
+      "ok": true,
+      "returncode": 0,
+      "stdout": "timeout handled: server sent no data\n",
+      "stderr": "",
+      "elapsed_ms": 292.838
+    },
+    {
+      "id": "chat",
+      "ok": true,
+      "returncode": 0,
+      "stdout": "Alice received: Alice: hello Bob\nBob received: Alice: hello Bob\n",
+      "stderr": "",
+      "elapsed_ms": 185.984
+    },
+    {
+      "id": "websocket",
+      "ok": true,
+      "returncode": 0,
+      "stdout": "WebSocket frame\n",
+      "stderr": "",
+      "elapsed_ms": 289.831
+    }
+  ],
+  "temporary_files_removed": true,
+  "elapsed_ms": 3079.558
+}

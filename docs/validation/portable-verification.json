@@ -1,0 +1,243 @@
+{
+  "ok": true,
+  "kind": "measured",
+  "mode": "local_verification",
+  "data_source": "local_verification",
+  "scope": "loopback_only",
+  "external_network_used": false,
+  "checks": [
+    {
+      "name": "TCP",
+      "ok": true,
+      "status": "passed",
+      "result_source": "measured",
+      "evidence": {
+        "host": "127.0.0.1",
+        "bytes": 24,
+        "matches": true
+      },
+      "error": null,
+      "elapsed_ms": 77.24
+    },
+    {
+      "name": "UDP",
+      "ok": true,
+      "status": "passed",
+      "result_source": "measured",
+      "evidence": {
+        "host": "127.0.0.1",
+        "bytes": 24,
+        "matches": true
+      },
+      "error": null,
+      "elapsed_ms": 61.166
+    },
+    {
+      "name": "HTTPS + trusted local CA",
+      "ok": true,
+      "status": "passed",
+      "result_source": "measured",
+      "evidence": {
+        "status": 200,
+        "tls_version": "TLSv1.3",
+        "certificate_verified": true,
+        "trust_source": "explicit_CA_pem",
+        "verified_chain_available": true
+      },
+      "error": null,
+      "elapsed_ms": 249.555
+    },
+    {
+      "name": "HTTP/2",
+      "ok": true,
+      "status": "passed",
+      "result_source": "measured",
+      "evidence": {
+        "http_version": "HTTP/2",
+        "status": 200
+      },
+      "error": null,
+      "elapsed_ms": 63.626
+    },
+    {
+      "name": "HTTP/3",
+      "ok": true,
+      "status": "passed",
+      "result_source": "measured",
+      "evidence": {
+        "http_version": "HTTP/3",
+        "alpn": "h3",
+        "status": 200,
+        "certificate_verified": true
+      },
+      "error": null,
+      "elapsed_ms": 236.518
+    },
+    {
+      "name": "WebSocket",
+      "ok": true,
+      "status": "passed",
+      "result_source": "measured",
+      "evidence": {
+        "matches": true
+      },
+      "error": null,
+      "elapsed_ms": 35.266
+    },
+    {
+      "name": "SSH pinned host key",
+      "ok": true,
+      "status": "passed",
+      "result_source": "measured",
+      "evidence": {
+        "host_key_verified": true,
+        "returncode": 0,
+        "command": "netlab-info"
+      },
+      "error": null,
+      "elapsed_ms": 117.331
+    },
+    {
+      "name": "DNS",
+      "ok": true,
+      "status": "passed",
+      "result_source": "measured",
+      "evidence": {
+        "records": [
+          "127.0.0.1"
+        ],
+        "ttl": 60,
+        "resolver_host": "127.0.0.1"
+      },
+      "error": null,
+      "elapsed_ms": 110.462
+    },
+    {
+      "name": "DOH",
+      "ok": true,
+      "status": "passed",
+      "result_source": "measured",
+      "evidence": {
+        "transport": "doh",
+        "certificate_verified": true,
+        "answers": [
+          "lab.local. 60 IN A 127.0.0.1"
+        ]
+      },
+      "error": null,
+      "elapsed_ms": 62.317
+    },
+    {
+      "name": "DOT",
+      "ok": true,
+      "status": "passed",
+      "result_source": "measured",
+      "evidence": {
+        "transport": "dot",
+        "certificate_verified": true,
+        "answers": [
+          "lab.local. 60 IN A 127.0.0.1"
+        ]
+      },
+      "error": null,
+      "elapsed_ms": 77.418
+    },
+    {
+      "name": "STUN",
+      "ok": true,
+      "status": "passed",
+      "result_source": "measured",
+      "evidence": {
+        "mapped_address": "127.0.0.1",
+        "mapped_port_matches_local": true
+      },
+      "error": null,
+      "elapsed_ms": 1.741
+    },
+    {
+      "name": "PCAP original fields",
+      "ok": true,
+      "status": "passed",
+      "result_source": "generated_fixture",
+      "evidence": {
+        "packet_count": 1,
+        "raw_bytes_match": true,
+        "tcp_seq": 123,
+        "tcp_ack": 456,
+        "source": "generated PCAP fixture, never transmitted",
+        "data_source": "pcap_import"
+      },
+      "error": null,
+      "elapsed_ms": 509.595
+    },
+    {
+      "name": "Core network + event snapshot",
+      "ok": true,
+      "status": "passed",
+      "result_source": "teaching_model",
+      "evidence": {
+        "network": "192.0.2.0",
+        "usable_hosts": 254,
+        "virtual_packet_status": "delivered",
+        "ARP_events": true,
+        "snapshot_scheduler": true
+      },
+      "error": null,
+      "elapsed_ms": 2.276
+    },
+    {
+      "name": "CPU execution + snapshot",
+      "ok": true,
+      "status": "passed",
+      "result_source": "teaching_model",
+      "evidence": {
+        "R0": 12,
+        "memory_10": 12,
+        "halted": true,
+        "snapshot_restore": true
+      },
+      "error": null,
+      "elapsed_ms": 0.531
+    },
+    {
+      "name": "SQLite initialization + reopen",
+      "ok": true,
+      "status": "passed",
+      "result_source": "local_storage",
+      "evidence": {
+        "schema_version": 2,
+        "saved_and_reopened": true,
+        "temporary_database_only": true
+      },
+      "error": null,
+      "elapsed_ms": 14.838
+    },
+    {
+      "name": "Python editor bundled runner",
+      "ok": true,
+      "status": "passed",
+      "result_source": "measured",
+      "evidence": {
+        "stdout": "你好 TCP\r\n",
+        "stderr": "",
+        "returncode": 0,
+        "external_interpreter_used": false,
+        "sandboxed": false,
+        "scope": "loopback_only"
+      },
+      "error": null,
+      "elapsed_ms": 193.909
+    }
+  ],
+  "cleanup": {
+    "servers_closed": true,
+    "temporary_files_removed": true
+  },
+  "summary": {
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0,
+    "total": 16
+  },
+  "elapsed_ms": 1905.072
+}
